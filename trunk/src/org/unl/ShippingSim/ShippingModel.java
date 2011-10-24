@@ -28,8 +28,8 @@ public class ShippingModel extends SimpleModel {
 	public void step() {
 		int size = agentList.size();
 		for (int i = 0; i < size; i++) {
-			Player p = (Player) agentList.get(i);
-			p.play();
+			//Player p = (Player) agentList.get(i);
+			//p.play();
 		}
 	}
 	
