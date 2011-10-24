@@ -1,0 +1,28 @@
+#summary Installing the boat-shipping project into eclipse
+
+= Pre-Requisite =
+
+  # Install the Eclipse Java IDE from http://www.eclipse.org/downloads/
+  # After installing, open Eclipse and install Subclipse.  Help -> Eclipse Marketplace.  Search for subversive, and click install.
+
+= Downloading the project source =
+
+  # Import the project using svn.  File -> Import -> SVN -> Project from SVN
+  # The URL is https://agent-boat-shipping.googlecode.com/svn/trunk
+  # Username is your google username
+  # Password is your generated password from the link on the [https://code.google.com/p/agent-boat-shipping/source/checkout source] page.
+  # Save the authentication
+  # When it asks to normalize the path, click no.
+  # Open the project in a new project wizard
+
+= Regularly update =
+Regularly update your source.  Whenever you start working on the source, you should update it first to get changes from other people.
+
+  # Right click on the project name in the left panel.  Select Team -> Update
+
+= Commiting changes = 
+When you have made some changes to the source, such as adding file(s), or changing file(s), then you will want to commit the changes up to others can see it.  
+  # Right click on the project name in the left panel.  Select Team -> Commit
+  # Be sure not to commit any files or directories starting with a . (period).  Uncheck them on the bottom of the dialog.
+  # Enter a message, and commit.
+
