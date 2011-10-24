@@ -14,7 +14,8 @@
   # Save the authentication
   # When it asks to normalize the path, click no.
   # Open the project in a new project wizard
-
+= Add Repast Library to Project =
+Properties > Java Build Path > Libraries > Add External JARs. Add repast.jar and all .jar in the lib folder.
 = Regularly update =
 Regularly update your source.  Whenever you start working on the source, you should update it first to get changes from other people.
 
@@ -25,4 +26,3 @@ When you have made some changes to the source, such as adding file(s), or changi
   # Right click on the project name in the left panel.  Select Team -> Commit
   # Be sure not to commit any files or directories starting with a . (period).  Uncheck them on the bottom of the dialog.
   # Enter a message, and commit.
-
