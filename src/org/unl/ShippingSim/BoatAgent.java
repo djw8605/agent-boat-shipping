@@ -20,7 +20,7 @@ public class BoatAgent extends SimpleModel implements Drawable {
 	// The global space
 	protected Object2DGrid space;
 	
-	public BoatAgent(int x, int y, Object2DGrid space) {
+	public BoatAgent(int x, int y, OceanSpace space) {
 		this.xpos = x;
 		this.ypos = y;
 		this.space = space;

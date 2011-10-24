@@ -11,7 +11,7 @@ public class BoatFactory {
 		
 	}
 	
-	public BoatAgent CreateBoat(int x, int y, Object2DGrid space) {
+	public BoatAgent CreateBoat(int x, int y, OceanSpace space) {
 		BoatAgent b = new BoatAgent(x, y, space);
 		// Do the initialization stuff
 		

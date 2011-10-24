@@ -28,7 +28,7 @@ public class ShippingModel extends SimpleModel {
 	protected int farsight;
 	
 	// The simulation space
-	protected Object2DGrid space;
+	protected OceanSpace space;
 	
 	// The display surface
 	protected DisplaySurface dsurf;
@@ -74,9 +74,11 @@ public class ShippingModel extends SimpleModel {
 	
 	public void buildModel() {
 		// Initialize the simulation space
-		space = new Object2DGrid(ShippingModel.SPACE_WIDTH, ShippingModel.SPACE_HEIGHT);
+		space = new OceanSpace(ShippingModel.SPACE_WIDTH, ShippingModel.SPACE_HEIGHT);
 		
 		// Add new boats & harbors to the agentlist
+		
+		// Place the boats
 		for (int i = 0; i < this.numBoats; i++) {
 			  int x, y;
 			  do {
