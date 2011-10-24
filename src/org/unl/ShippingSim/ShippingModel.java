@@ -1,6 +1,11 @@
 package org.unl.ShippingSim;
 
+import java.awt.Color;
+
 import uchicago.src.sim.engine.SimpleModel;
+import uchicago.src.sim.gui.DisplaySurface;
+import uchicago.src.sim.gui.Object2DDisplay;
+import uchicago.src.sim.space.Object2DGrid;
 
 public class ShippingModel extends SimpleModel {
 
@@ -21,7 +26,14 @@ public class ShippingModel extends SimpleModel {
 	// How far in the future the boats will look
 	protected int farsight;
 	
+	// The simulation space
+	protected Object2DGrid space;
 	
+	// The display surface
+	protected DisplaySurface dsurf;
+	
+	public final static int SPACE_WIDTH = 800;
+	public final static int SPACE_HEIGHT = 800;
 	
 	public ShippingModel() {
 		this.params = new String [] {"NumberBoats",
@@ -37,13 +49,32 @@ public class ShippingModel extends SimpleModel {
 	public void setup() {
 		super.setup();
 		
+		dsurf = new DisplaySurface(this, "Ocean");
 		// Initialize the boat & Harbor factories
 		
 	}
 	
+	public void buildDisplay() {
+
+		Object2DDisplay agentDisplay = new Object2DDisplay(this.space);
+		agentDisplay.setObjectList(agentList);
+		
+
+		dsurf.addDisplayableProbeable(agentDisplay, "Agents");
+		addSimEventListener(dsurf);
+		dsurf.setBackground(Color.blue);
+
+	}
+	
 	public void buildModel() {
+		// Initialize the simulation space
+		space = new Object2DGrid(ShippingModel.SPACE_WIDTH, ShippingModel.SPACE_HEIGHT);
+		
 		// Add new boats & harbors to the agentlist
 		
+		
+		buildDisplay();
+		dsurf.display();
 	}
 
 	
