@@ -91,6 +91,11 @@ public class ShippingModel extends SimpleModel {
 			  agentList.add(agent);
 			}
 		
+		// Place and add the Harbors
+		
+		
+		// Add the harbors to the space
+		
 		buildDisplay();
 		dsurf.display();
 	}
