@@ -36,8 +36,8 @@ public class ShippingModel extends SimpleModel {
 	// Boat Factory
 	protected BoatFactory boatfactory;
 	
-	public final static int SPACE_WIDTH = 800;
-	public final static int SPACE_HEIGHT = 800;
+	public final static int SPACE_WIDTH = 100;
+	public final static int SPACE_HEIGHT = 100;
 	
 	public ShippingModel() {
 		this.params = new String [] {"NumberBoats",
@@ -101,6 +101,8 @@ public class ShippingModel extends SimpleModel {
 			boat.play();
 			
 		}
+		
+		dsurf.updateDisplay();
 	}
 	
 	
