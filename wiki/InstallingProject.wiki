@@ -14,6 +14,7 @@
   # Save the authentication
   # When it asks to normalize the path, click no.
   # Open the project in a new project wizard
+
 = Add Repast library to project =
 Properties > Java Build Path > Libraries > Add External JARs. Add repast.jar and all .jar in the lib folder.
 
@@ -27,3 +28,14 @@ When you have made some changes to the source, such as adding file(s), or changi
   # Right click on the project name in the left panel.  Select Team -> Commit
   # Be sure not to commit any files or directories starting with a . (period).  Uncheck them on the bottom of the dialog.
   # Enter a message, and commit.
+
+
+= Running repast from Eclipse =
+To enable running repast from Eclipse, you need to create a Run Configuration.  You must add the repast library to the project library, described above.
+
+  # Run -> Run Configurations...
+  # Create a new configuration under Java Application
+  # The main class is: {{{uchicago.src.sim.engine.SimInit}}}
+  # Under the arguments tab, Program arguments is: {{{org.unl.ShippingSim.ShippingModel}}}
+  # VM arguments is: {{{-cp "${project_classpath}"}}}
+
