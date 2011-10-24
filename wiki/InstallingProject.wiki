@@ -14,8 +14,9 @@
   # Save the authentication
   # When it asks to normalize the path, click no.
   # Open the project in a new project wizard
-= Add Repast Library to Project =
+= Add Repast library to project =
 Properties > Java Build Path > Libraries > Add External JARs. Add repast.jar and all .jar in the lib folder.
+
 = Regularly update =
 Regularly update your source.  Whenever you start working on the source, you should update it first to get changes from other people.
 
