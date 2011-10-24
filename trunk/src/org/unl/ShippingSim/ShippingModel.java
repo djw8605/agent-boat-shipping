@@ -6,6 +6,7 @@ import uchicago.src.sim.engine.SimpleModel;
 import uchicago.src.sim.gui.DisplaySurface;
 import uchicago.src.sim.gui.Object2DDisplay;
 import uchicago.src.sim.space.Object2DGrid;
+import uchicago.src.sim.util.Random;
 
 public class ShippingModel extends SimpleModel {
 
@@ -32,6 +33,9 @@ public class ShippingModel extends SimpleModel {
 	// The display surface
 	protected DisplaySurface dsurf;
 	
+	// Boat Factory
+	protected BoatFactory boatfactory;
+	
 	public final static int SPACE_WIDTH = 800;
 	public final static int SPACE_HEIGHT = 800;
 	
@@ -43,6 +47,8 @@ public class ShippingModel extends SimpleModel {
 									 "QueueImpact",
 									 "FarSight"};
 		this.name = "Shipping Simulation";
+		
+		boatfactory = new BoatFactory();
 		
 	}
 	
@@ -71,7 +77,17 @@ public class ShippingModel extends SimpleModel {
 		space = new Object2DGrid(ShippingModel.SPACE_WIDTH, ShippingModel.SPACE_HEIGHT);
 		
 		// Add new boats & harbors to the agentlist
-		
+		for (int i = 0; i < this.numBoats; i++) {
+			  int x, y;
+			  do {
+			    x = Random.uniform.nextIntFromTo(0, space.getSizeX() - 1);
+			    y = Random.uniform.nextIntFromTo(0, space.getSizeY() - 1);
+			  } while (space.getObjectAt(x, y) != null);
+
+			  BoatAgent agent = boatfactory.CreateBoat(x, y, space);
+			  space.putObjectAt(x, y, agent);
+			  agentList.add(agent);
+			}
 		
 		buildDisplay();
 		dsurf.display();
@@ -81,8 +97,9 @@ public class ShippingModel extends SimpleModel {
 	public void step() {
 		int size = agentList.size();
 		for (int i = 0; i < size; i++) {
-			//Player p = (Player) agentList.get(i);
-			//p.play();
+			BoatAgent boat = (BoatAgent) agentList.get(i);
+			boat.play();
+			
 		}
 	}
 	
