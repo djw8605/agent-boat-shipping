@@ -10,8 +10,8 @@ public class HarborAgent {
 	protected int ypos;
 	
 	public HarborAgent(int x, int y, OceanSpace space) {
-		
-		
+		xpos = x;
+		ypos = y;
 	}
 	
 	
