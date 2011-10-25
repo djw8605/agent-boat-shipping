@@ -1,17 +1,19 @@
 package org.unl.ShippingSim;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class HarborAgent {
 
-	ArrayList<SellableItem> items = new ArrayList<SellableItem>();
 	
-	protected int xpos;
-	protected int ypos;
+	ArrayList<SellableItem> items;
+	protected Point pos;
+
 	
-	public HarborAgent(int x, int y, OceanSpace space) {
-		xpos = x;
-		ypos = y;
+	public HarborAgent(int X, int Y, OceanSpace space, ArrayList<SellableItem> Items) {
+		pos.x = X;
+		pos.y = Y;
+		items = Items;
 	}
 	
 	
@@ -19,12 +21,15 @@ public class HarborAgent {
 		return items;
 	}
 	
+	public Point GetPos(){
+		return pos;
+	}
 	public int getX() {
-		return this.xpos;
+		return pos.x;
 	}
 	
 	public int getY() {
-		return this.ypos;
+		return pos.y;
 	}
 	
 	
