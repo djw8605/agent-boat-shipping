@@ -2,6 +2,7 @@ package org.unl.ShippingSim;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import uchicago.src.sim.engine.SimpleModel;
 import uchicago.src.sim.gui.Drawable;
@@ -29,6 +30,7 @@ public class BoatAgent extends SimpleModel implements Drawable {
 		Dimension space_dimension = space.getSize();
 		max_y = space_dimension.height;
 		max_x = space_dimension.width;
+		
 		ArrayList<HarborAgent> harbors = space.GetHarbors();
 		for (int i = 0; i < harbors.size(); i++) {
 			int harborx = harbors.get(i).getX();
@@ -38,27 +40,39 @@ public class BoatAgent extends SimpleModel implements Drawable {
 	
 	
 	public void play() {
-		// Move randomly :)
-		// since harbors stationed in middle of window, we want fastest route-->straight lines/diagonals for initial 
-		// movement, in case harbor goal changes also almost straight line
 		
-		int horiz = Random.uniform.nextIntFromTo(-1, 1);
-		int vert = Random.uniform.nextIntFromTo(-1, 1);
+		//first value is harbor destination, second value is current boat location
+		
+		int horiz = moveDX(50,xpos);
+		int vert = moveDY(100,ypos);
 		
 		// the movement has to be dependent on speed of the boat, therefore the movements are different for each boat
-		int diagonalUpRight = Random.uniform.nextIntFromTo(-1, 1);
-		int diagonalDownRight = Random.uniform.nextIntFromTo(-1, 1);
-		int diagonalUpLeft = Random.uniform.nextIntFromTo(-1, 1);
-		int diagonalDownLeft = Random.uniform.nextIntFromTo(-1, 1);
 		
 		space.putObjectAt(xpos, ypos, null);
-		xpos = Math.max(Math.min(horiz + xpos, max_x-1), 0);
-		ypos = Math.max(Math.min(vert + ypos, max_y-1), 0);
-		space.putObjectAt(xpos, ypos, this);
+		
+		if(horiz == 50 &&  vert == 100){
+			ypos = ypos;
+			xpos = xpos;
+		}
+		else{
+			xpos = Math.max(Math.min(horiz + xpos, max_x-1), 0);
+			ypos = Math.max(Math.min(vert + ypos, max_y-1), 0);
+		}
+		
+	    space.putObjectAt(xpos, ypos, this);
 		
 	}
 	
+	public int moveDY(int harbory,int boaty){
+		if(harbory == boaty)return 0;
+		else return harbory-boaty;
+	}
 
+	public int moveDX(int harborx,int boatx){
+		if(harborx == boatx)return 0;
+		else return harborx-boatx;
+	}
+	
 	public void draw(SimGraphics g) {
 		g.drawFastRoundRect(Color.green);
 	}
