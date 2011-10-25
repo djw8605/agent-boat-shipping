@@ -1,5 +1,6 @@
 package org.unl.ShippingSim;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -38,6 +39,7 @@ public class HarborAgent implements Drawable, AbstractAgent {
 	
 	public void draw(SimGraphics graphic) {
 		// Draw the harbor
+		graphic.drawFastRoundRect(Color.red);
 		
 		// Draw the current prices
 		
