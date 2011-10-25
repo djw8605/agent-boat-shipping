@@ -10,7 +10,7 @@ import uchicago.src.sim.gui.SimGraphics;
 import uchicago.src.sim.space.Object2DGrid;
 import uchicago.src.sim.util.Random;
 
-public class BoatAgent extends SimpleModel implements Drawable {
+public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 
 	// The position of the boat
 	protected int xpos;
@@ -39,7 +39,7 @@ public class BoatAgent extends SimpleModel implements Drawable {
 	}
 	
 	
-	public void play() {
+	public void step() {
 		
 		//first value is harbor destination, second value is current boat location
 		

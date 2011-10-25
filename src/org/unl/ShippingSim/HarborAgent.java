@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import uchicago.src.sim.gui.Drawable;
 import uchicago.src.sim.gui.SimGraphics;
 
-public class HarborAgent implements Drawable {
+public class HarborAgent implements Drawable, AbstractAgent {
 
 	
 	ArrayList<SellableItem> items;
@@ -14,6 +14,7 @@ public class HarborAgent implements Drawable {
 
 	
 	public HarborAgent(int X, int Y, OceanSpace space, ArrayList<SellableItem> Items) {
+		pos = new Point();
 		pos.x = X;
 		pos.y = Y;
 		items = Items;
@@ -36,7 +37,18 @@ public class HarborAgent implements Drawable {
 	}
 	
 	public void draw(SimGraphics graphic) {
+		// Draw the harbor
 		
+		// Draw the current prices
+		
+		
+		
+	}
+
+
+	@Override
+	public void step() {
+		// TODO Auto-generated method stub
 		
 	}
 	

@@ -121,8 +121,8 @@ public class ShippingModel extends SimpleModel {
 	public void step() {
 		int size = agentList.size();
 		for (int i = 0; i < size; i++) {
-			BoatAgent boat = (BoatAgent) agentList.get(i);
-			boat.play();
+			AbstractAgent agent = (AbstractAgent) agentList.get(i);
+			agent.step();
 			
 		}
 		
