@@ -1,6 +1,5 @@
 package org.unl.ShippingSim;
 
-import uchicago.src.sim.space.Object2DGrid;
 
 public class BoatFactory {
 

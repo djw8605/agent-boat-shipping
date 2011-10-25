@@ -33,8 +33,8 @@ public class HarborFactory {
 		ArrayList<SellableItem> items = new ArrayList<SellableItem>();
 		for (int i = 0; i < numItems; i++) {
 			// Probably should do some distribution of item values and whatnot
-			double baseline = Random.normal.nextDouble(50.0, 100.0);
-			double initial_inv = Random.normal.nextDouble(100.0, 200.0);
+			double baseline = Random.uniform.nextDoubleFromTo(50.0, 100.0);
+			double initial_inv = Random.uniform.nextDoubleFromTo(100.0, 200.0);
 			SellableItem item = new SellableItem((float)baseline, (float)initial_inv);
 			items.add(item);
 			
