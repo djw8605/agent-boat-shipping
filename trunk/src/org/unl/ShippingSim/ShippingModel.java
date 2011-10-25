@@ -35,6 +35,9 @@ public class ShippingModel extends SimpleModel {
 	// Boat Factory
 	protected BoatFactory boatfactory;
 	
+	// Harbor Factory
+	protected HarborFactory harborfactory;
+	
 	public final static int SPACE_WIDTH = 100;
 	public final static int SPACE_HEIGHT = 100;
 	
@@ -48,6 +51,7 @@ public class ShippingModel extends SimpleModel {
 		this.name = "Shipping Simulation";
 		
 		boatfactory = new BoatFactory();
+		harborfactory = new HarborFactory();
 		
 	}
 	
@@ -71,6 +75,7 @@ public class ShippingModel extends SimpleModel {
 
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void buildModel() {
 		// Initialize the simulation space
 		space = new OceanSpace(ShippingModel.SPACE_WIDTH, ShippingModel.SPACE_HEIGHT);
@@ -91,10 +96,23 @@ public class ShippingModel extends SimpleModel {
 			}
 		
 		// Place and add the Harbors
+		HarborAgent harbor = harborfactory.createHarbor(space.getSizeX() / 2, 0, space);
+		agentList.add(harbor);
+		space.AddHarbor(harbor);
 		
+		harbor = harborfactory.createHarbor(space.getSizeX() / 2, space.getSizeY(), space);
+		agentList.add(harbor);
+		space.AddHarbor(harbor);
 		
-		// Add the harbors to the space
+		harbor = harborfactory.createHarbor(0, space.getSizeY() / 2, space);
+		agentList.add(harbor);
+		space.AddHarbor(harbor);
 		
+		harbor = harborfactory.createHarbor(space.getSizeY(), space.getSizeY() / 2, space);
+		agentList.add(harbor);
+		space.AddHarbor(harbor);
+		
+				
 		buildDisplay();
 		dsurf.display();
 	}
