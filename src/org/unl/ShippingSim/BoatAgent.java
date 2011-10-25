@@ -2,6 +2,7 @@ package org.unl.ShippingSim;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import uchicago.src.sim.engine.SimpleModel;
 import uchicago.src.sim.gui.Drawable;
@@ -27,6 +28,12 @@ public class BoatAgent extends SimpleModel implements Drawable {
 		Dimension space_dimension = space.getSize();
 		max_y = space_dimension.height;
 		max_x = space_dimension.width;
+		ArrayList<HarborAgent> harbors = space.GetHarbors();
+		for (int i = 0; i < harbors.size(); i++) {
+			int harborx = harbors.get(i).getX();
+			int harbory = harbors.get(i).getY();
+		}
+			
 		
 	}
 	
