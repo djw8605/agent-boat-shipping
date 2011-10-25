@@ -33,9 +33,17 @@ public class BoatAgent extends SimpleModel implements Drawable {
 	
 	public void play() {
 		// Move randomly :)
+		// since harbors stationed in middle of window, we want fastest route-->straight lines/diagonals for initial 
+		// movement, in case harbor goal changes also almost straight line
 		
 		int horiz = Random.uniform.nextIntFromTo(-1, 1);
 		int vert = Random.uniform.nextIntFromTo(-1, 1);
+		
+		// the movement has to be dependent on speed of the boat, therefore the movements are different for each boat
+		int diagonalUpRight = Random.uniform.nextIntFromTo(-1, 1);
+		int diagonalDownRight = Random.uniform.nextIntFromTo(-1, 1);
+		int diagonalUpLeft = Random.uniform.nextIntFromTo(-1, 1);
+		int diagonalDownLeft = Random.uniform.nextIntFromTo(-1, 1);
 		
 		space.putObjectAt(xpos, ypos, null);
 		xpos = Math.max(Math.min(horiz + xpos, max_x-1), 0);
