@@ -3,7 +3,10 @@ package org.unl.ShippingSim;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class HarborAgent {
+import uchicago.src.sim.gui.Drawable;
+import uchicago.src.sim.gui.SimGraphics;
+
+public class HarborAgent implements Drawable {
 
 	
 	ArrayList<SellableItem> items;
@@ -32,5 +35,9 @@ public class HarborAgent {
 		return pos.y;
 	}
 	
+	public void draw(SimGraphics graphic) {
+		
+		
+	}
 	
 }
