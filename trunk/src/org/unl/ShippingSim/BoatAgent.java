@@ -13,10 +13,13 @@ import uchicago.src.sim.util.Random;
 public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 
 	// The position of the boat
-	protected int xpos;
-	protected int ypos;
+	protected float xpos;
+	protected float ypos;
 	protected int max_x;
 	protected int max_y;
+	
+	//  Speed of the boat
+	protected double speed;
 	
 	// The global space
 	protected Object2DGrid space;
@@ -30,6 +33,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		Dimension space_dimension = space.getSize();
 		max_y = space_dimension.height;
 		max_x = space_dimension.width;
+		speed = (float)0.2;
 		
 		ArrayList<HarborAgent> harbors = space.GetHarbors();
 		for (int i = 0; i < harbors.size(); i++) {
@@ -41,15 +45,28 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	
 	public void step() {
 		
+		int harborx = 50;
+		int harbory = 50;
+		
+		double a = (double) harborx - xpos;
+		double b = (double) harbory - ypos;
+		double distance = Math.sqrt((Math.pow(a, 2) +  Math.pow(b, 2)));
+		
+		double degrad = Math.PI/180.0;
+		double new_xpos = this.speed * (a/distance) + xpos;
+		double new_ypos = this.speed * (b/distance) + ypos;
 		//first value is harbor destination, second value is current boat location
 		
-		int horiz = moveDX(50,xpos);
-		int vert = moveDY(100,ypos);
+		// First, find the slope of the line between where we are, and where we want to go
+		//float horiz = moveDX(50,xpos);
+		//float vert = moveDY(100,ypos);
+		
+		
 		
 		// the movement has to be dependent on speed of the boat, therefore the movements are different for each boat
 		
-		space.putObjectAt(xpos, ypos, null);
-		
+		space.putObjectAt((int)xpos, (int)ypos, null);
+		/*
 		if(horiz == 50 &&  vert == 100){
 			ypos = ypos;
 			xpos = xpos;
@@ -58,17 +75,19 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			xpos = Math.max(Math.min(horiz + xpos, max_x-1), 0);
 			ypos = Math.max(Math.min(vert + ypos, max_y-1), 0);
 		}
-		
-	    space.putObjectAt(xpos, ypos, this);
+		*/
+	    space.putObjectAt((int)new_xpos, (int)new_ypos, this);
+	    xpos = (float)new_xpos;
+	    ypos = (float)new_ypos;
 		
 	}
 	
-	public int moveDY(int harbory,int boaty){
+	public float moveDY(int harbory,float boaty){
 		if(harbory == boaty)return 0;
 		else return harbory-boaty;
 	}
 
-	public int moveDX(int harborx,int boatx){
+	public float moveDX(int harborx,float boatx){
 		if(harborx == boatx)return 0;
 		else return harborx-boatx;
 	}
@@ -80,13 +99,13 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 
 	@Override
 	public int getX() {
-		return this.xpos;
+		return (int)this.xpos;
 	}
 
 
 	@Override
 	public int getY() {
-		return this.ypos;
+		return (int)this.ypos;
 	}
 
 }
