@@ -66,30 +66,14 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		double b = (double) harbory - ypos;
 		double distance = Math.sqrt((Math.pow(a, 2) +  Math.pow(b, 2)));
 		
-		double degrad = Math.PI/180.0;
+		// This is basically doing an inverse sin/cos to find the new position.
 		double new_xpos = this.speed * (a/distance) + xpos;
 		double new_ypos = this.speed * (b/distance) + ypos;
-		//first value is harbor destination, second value is current boat location
-		
-		// First, find the slope of the line between where we are, and where we want to go
-		//float horiz = moveDX(50,xpos);
-		//float vert = moveDY(100,ypos);
-		
-		
-		
-		// the movement has to be dependent on speed of the boat, therefore the movements are different for each boat
-		
+
+
 		space.putObjectAt((int)xpos, (int)ypos, null);
-		/*
-		if(horiz == 50 &&  vert == 100){
-			ypos = ypos;
-			xpos = xpos;
-		}
-		else{
-			xpos = Math.max(Math.min(horiz + xpos, max_x-1), 0);
-			ypos = Math.max(Math.min(vert + ypos, max_y-1), 0);
-		}
-		*/
+		
+		// Be sure to not place the boats off the map
 	    xpos = Math.max(Math.min((float)new_xpos, max_x), 0);
 	    ypos = Math.max(Math.min((float)new_ypos, max_y), 0);
 	    
@@ -102,16 +86,6 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	    	this.loading = true;
 	    }
 		
-	}
-	
-	public float moveDY(int harbory,float boaty){
-		if(harbory == boaty)return 0;
-		else return harbory-boaty;
-	}
-
-	public float moveDX(int harborx,float boatx){
-		if(harborx == boatx)return 0;
-		else return harborx-boatx;
 	}
 	
 	public void draw(SimGraphics g) {
