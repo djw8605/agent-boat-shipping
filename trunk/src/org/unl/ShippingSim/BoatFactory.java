@@ -1,5 +1,7 @@
 package org.unl.ShippingSim;
 
+import uchicago.src.sim.util.Random;
+
 
 public class BoatFactory {
 
@@ -13,6 +15,8 @@ public class BoatFactory {
 	public BoatAgent CreateBoat(int x, int y, OceanSpace space) {
 		BoatAgent b = new BoatAgent(x, y, space);
 		// Do the initialization stuff
+		float boat_size = Random.uniform.nextFloatFromTo(1, 20);
+		b.setSize(boat_size);
 		
 		return b;
 		

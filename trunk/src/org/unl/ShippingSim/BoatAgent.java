@@ -30,6 +30,9 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	// The harbor we are traveling to
 	protected HarborAgent target_harbor;
 	
+	// The size of the boat, affects unload time
+	protected double size;
+	
 	
 	
 	public BoatAgent(int x, int y, OceanSpace space) {
@@ -134,6 +137,21 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		return this.space.GetHarbors().get(harbor_id);
 	}
 
+	
+	/**
+	 * Method to get the unload time of this boat
+	 */
+	public int getUnloadTime() {
+		return (int)this.size;
+	}
+	
+	
+	public void setSize(double size) {
+		this.size = size;
+	}
+	
+	
+	
 	@Override
 	public int getX() {
 		return (int)this.xpos;
