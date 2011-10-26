@@ -22,7 +22,13 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	protected double speed;
 	
 	// The global space
-	protected Object2DGrid space;
+	protected OceanSpace space;
+	
+	// Whether we are at a harbor or not
+	protected boolean loading = false;
+	
+	// The harbor we are traveling to
+	protected HarborAgent target_harbor;
 	
 	
 	
@@ -35,18 +41,23 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		max_x = space_dimension.width;
 		speed = (float)0.2;
 		
-		ArrayList<HarborAgent> harbors = space.GetHarbors();
-		for (int i = 0; i < harbors.size(); i++) {
-			int harborx = harbors.get(i).getX();
-			int harbory = harbors.get(i).getY();
-		}
+
 	}
 	
 	
 	public void step() {
 		
-		int harborx = 50;
-		int harbory = 50;
+		// If we're loading, don't do anything
+		if (loading == true) 
+			return;
+		
+		// First iteration, the target_harbor will be null
+		if (target_harbor == null) {
+			target_harbor = CalculateNextHarbor();
+		}
+		
+		int harborx = target_harbor.getX();
+		int harbory = target_harbor.getY();
 		
 		double a = (double) harborx - xpos;
 		double b = (double) harbory - ypos;
@@ -79,6 +90,12 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	    space.putObjectAt((int)new_xpos, (int)new_ypos, this);
 	    xpos = (float)new_xpos;
 	    ypos = (float)new_ypos;
+	    
+	    // Check if we've arrived at the harbor.
+	    if ((harborx == (int)xpos) && (harbory == (int)ypos)) {
+	    	this.target_harbor.enqueueBoat(this);
+	    	this.loading = true;
+	    }
 		
 	}
 	
@@ -95,7 +112,27 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	public void draw(SimGraphics g) {
 		g.drawFastRoundRect(Color.green);
 	}
+	
+	/**
+	 * The Harbor will call this when the boat is done loading, and should
+	 * loading, and should calculate the next harbor to go to.
+	 */
+	public void doneLoading() {
+		// First, set us as done loading
+		loading = false;
+		
+		// Calculate the next harbor to go to
+		this.target_harbor = CalculateNextHarbor();
+	}
+	
 
+	/**
+	 * Method to calcualte the next harbor to travel to.
+	 */
+	protected HarborAgent CalculateNextHarbor() {
+		int harbor_id = Random.uniform.nextIntFromTo(0, this.space.GetHarbors().size()-1);
+		return this.space.GetHarbors().get(harbor_id);
+	}
 
 	@Override
 	public int getX() {

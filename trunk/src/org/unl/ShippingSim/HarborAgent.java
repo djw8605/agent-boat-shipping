@@ -3,6 +3,7 @@ package org.unl.ShippingSim;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import uchicago.src.sim.gui.Drawable;
 import uchicago.src.sim.gui.SimGraphics;
@@ -12,6 +13,9 @@ public class HarborAgent implements Drawable, AbstractAgent {
 	
 	ArrayList<SellableItem> items;
 	protected Point pos;
+	
+	protected LinkedList<BoatAgent> boat_queue;
+	protected int boat_unload_counter = 0;
 
 	
 	public HarborAgent(int X, int Y, OceanSpace space, ArrayList<SellableItem> Items) {
@@ -19,6 +23,8 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		pos.x = X;
 		pos.y = Y;
 		items = Items;
+		
+		boat_queue = new LinkedList<BoatAgent>();
 	}
 	
 	
@@ -46,11 +52,26 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		
 		
 	}
+	
+	public void enqueueBoat(BoatAgent boat) {
+		// Enqueue the boat to be unloaded
+		boat_queue.add(boat);
+		
+	}
 
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
+		
+		// Check if the current boat should sent on it's way
+		if ((boat_unload_counter == 0) && (boat_queue.size() > 0)) {
+			BoatAgent current_boat = boat_queue.pop();
+			
+			
+		} else if (boat_queue.size() > 0) {
+			boat_unload_counter -= 1;
+		}
+		
 		
 	}
 	
