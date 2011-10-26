@@ -67,8 +67,10 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		if ((boat_unload_counter == 0) && (boat_queue.size() > 0)) {
 			BoatAgent current_boat = boat_queue.pop();
 			current_boat.doneLoading();
+			
 			if (boat_queue.size() > 0)
 				boat_unload_counter = boat_queue.get(0).getUnloadTime();
+			
 		} else if (boat_queue.size() > 0) {
 			boat_unload_counter -= 1;
 		}
