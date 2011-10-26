@@ -97,7 +97,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	
 	/**
 	 * The Harbor will call this when the boat is done loading, and should
-	 * loading, and should calculate the next harbor to go to.
+	 * calculate the next harbor to go to.
 	 */
 	public void doneLoading() {
 		// First, set us as done loading
