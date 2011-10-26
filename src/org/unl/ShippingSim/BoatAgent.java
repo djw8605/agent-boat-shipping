@@ -89,7 +89,10 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	}
 	
 	public void draw(SimGraphics g) {
-		g.drawFastRoundRect(Color.green);
+		
+		// Only draw the boat if it's not in harbor
+		if (this.loading == false)
+			g.drawFastRoundRect(Color.green);
 	}
 	
 	/**
