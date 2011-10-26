@@ -2,6 +2,7 @@ package org.unl.ShippingSim;
 
 import java.awt.Color;
 
+import uchicago.src.sim.analysis.OpenSequenceGraph;
 import uchicago.src.sim.engine.SimpleModel;
 import uchicago.src.sim.gui.DisplaySurface;
 import uchicago.src.sim.gui.Object2DDisplay;
@@ -38,6 +39,9 @@ public class ShippingModel extends SimpleModel {
 	// Harbor Factory
 	protected HarborFactory harborfactory;
 	
+	// Harbor queue graphs
+	protected OpenSequenceGraph queue_graph;
+	
 	public final static int SPACE_WIDTH = 100;
 	public final static int SPACE_HEIGHT = 100;
 	
@@ -52,6 +56,7 @@ public class ShippingModel extends SimpleModel {
 		
 		boatfactory = new BoatFactory();
 		harborfactory = new HarborFactory();
+		
 		
 	}
 	
@@ -72,7 +77,14 @@ public class ShippingModel extends SimpleModel {
 		dsurf.addDisplayableProbeable(agentDisplay, "Agents");
 		addSimEventListener(dsurf);
 		dsurf.setBackground(Color.blue);
-
+		
+		queue_graph = new OpenSequenceGraph("Harbor Queues", this);
+		queue_graph.setXViewPolicy(OpenSequenceGraph.SHOW_LAST);
+		queue_graph.setXRange(0, 1000);
+		for (int i = 0; i < space.GetHarbors().size(); i++) {
+			queue_graph.createSequence("Harbor " + Integer.toString(i), space.GetHarbors().get(i), "getQueueSize");
+			//queue_graph.addSequence("Harbor " + Integer.toString(i), new HarborQueueSeq(i, space));
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -112,12 +124,13 @@ public class ShippingModel extends SimpleModel {
 		agentList.add(harbor);
 		space.AddHarbor(harbor);
 		
-				
+		
 		buildDisplay();
+		this.queue_graph.display();
 		dsurf.display();
 	}
 
-	
+	private int stepper = 0;
 	public void step() {
 		int size = agentList.size();
 		for (int i = 0; i < size; i++) {
@@ -125,6 +138,14 @@ public class ShippingModel extends SimpleModel {
 			agent.step();
 			
 		}
+		
+		// Update the graphs
+		if ((stepper % 100) == 0) {
+			stepper = 0;
+			this.queue_graph.step();
+		}
+		stepper++;
+		
 		
 		dsurf.updateDisplay();
 	}
