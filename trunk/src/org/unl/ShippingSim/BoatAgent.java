@@ -40,8 +40,8 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		this.ypos = y;
 		this.space = space;
 		Dimension space_dimension = space.getSize();
-		max_y = space_dimension.height;
-		max_x = space_dimension.width;
+		max_y = space_dimension.height - 1;
+		max_x = space_dimension.width - 1;
 		speed = (float)0.2;
 		
 
@@ -90,9 +90,11 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			ypos = Math.max(Math.min(vert + ypos, max_y-1), 0);
 		}
 		*/
-	    space.putObjectAt((int)new_xpos, (int)new_ypos, this);
-	    xpos = (float)new_xpos;
-	    ypos = (float)new_ypos;
+	    xpos = Math.max(Math.min((float)new_xpos, max_x), 0);
+	    ypos = Math.max(Math.min((float)new_ypos, max_y), 0);
+	    
+	    space.putObjectAt((int)xpos, (int)ypos, this);
+
 	    
 	    // Check if we've arrived at the harbor.
 	    if ((harborx == (int)xpos) && (harbory == (int)ypos)) {

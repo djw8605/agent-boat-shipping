@@ -15,7 +15,7 @@ public class BoatFactory {
 	public BoatAgent CreateBoat(int x, int y, OceanSpace space) {
 		BoatAgent b = new BoatAgent(x, y, space);
 		// Do the initialization stuff
-		float boat_size = Random.uniform.nextFloatFromTo(1, 20);
+		float boat_size = Random.uniform.nextFloatFromTo(100, 300);
 		b.setSize(boat_size);
 		
 		return b;
