@@ -57,6 +57,10 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		// Enqueue the boat to be unloaded
 		boat_queue.add(boat);
 		
+		if (boat_queue.size() == 1) {
+			this.boat_unload_counter = boat.getUnloadTime();
+		}
+		
 	}
 
 	public double getQueueSize() {
