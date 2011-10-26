@@ -56,7 +56,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		
 		// First iteration, the target_harbor will be null
 		if (target_harbor == null) {
-			target_harbor = CalculateNextHarbor();
+			target_harbor = CalculateNextHarbor(null);
 		}
 		
 		int harborx = target_harbor.getX();
@@ -104,14 +104,17 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		loading = false;
 		
 		// Calculate the next harbor to go to
-		this.target_harbor = CalculateNextHarbor();
+		this.target_harbor = CalculateNextHarbor(this.target_harbor);
 	}
 	
 
 	/**
 	 * Method to calculate the next harbor to travel to.
+	 * NOTE: current_harbor can be null, on first iteration
 	 */
-	protected HarborAgent CalculateNextHarbor() {
+	protected HarborAgent CalculateNextHarbor(HarborAgent current_harbor) {
+		
+		
 		int harbor_id = Random.uniform.nextIntFromTo(0, this.space.GetHarbors().size()-1);
 		return this.space.GetHarbors().get(harbor_id);
 	}
