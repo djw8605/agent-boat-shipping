@@ -109,7 +109,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	
 
 	/**
-	 * Method to calcualte the next harbor to travel to.
+	 * Method to calculate the next harbor to travel to.
 	 */
 	protected HarborAgent CalculateNextHarbor() {
 		int harbor_id = Random.uniform.nextIntFromTo(0, this.space.GetHarbors().size()-1);
