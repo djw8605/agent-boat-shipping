@@ -100,7 +100,7 @@ public class ShippingModel extends SimpleModel {
 		agentList.add(harbor);
 		space.AddHarbor(harbor);
 		
-		harbor = harborfactory.createHarbor(space.getSizeX() / 2, space.getSizeY(), space);
+		harbor = harborfactory.createHarbor(space.getSizeX() / 2, space.getSizeY()-1, space);
 		agentList.add(harbor);
 		space.AddHarbor(harbor);
 		
@@ -108,7 +108,7 @@ public class ShippingModel extends SimpleModel {
 		agentList.add(harbor);
 		space.AddHarbor(harbor);
 		
-		harbor = harborfactory.createHarbor(space.getSizeY(), space.getSizeY() / 2, space);
+		harbor = harborfactory.createHarbor(space.getSizeX()-1, space.getSizeY() / 2, space);
 		agentList.add(harbor);
 		space.AddHarbor(harbor);
 		
