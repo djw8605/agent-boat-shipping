@@ -59,6 +59,9 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		
 	}
 
+	public double getQueueSize() {
+		return (double)this.boat_queue.size();
+	}
 
 	@Override
 	public void step() {
