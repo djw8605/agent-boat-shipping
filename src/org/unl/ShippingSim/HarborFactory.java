@@ -6,7 +6,7 @@ import uchicago.src.sim.util.Random;
 
 public class HarborFactory {
 
-	protected int length, height;
+	protected int width, height;
 	//arguments for each item
 	protected int num_items = 4;
 	protected double base_line[] = {10000,10000,20000,20000};
@@ -20,15 +20,15 @@ public class HarborFactory {
 	protected double y[] = {0.5,0,1,0.5};
 	
 	// Initialize HarborFactory
-	public HarborFactory(int length, int height) {
-		this.length = length;
+	public HarborFactory(int width, int height) {
+		this.width = width;
 		this.height = height;
 	}
 	public ArrayList<HarborAgent> CreateHarbors(){
 		ArrayList<HarborAgent> harbors = new ArrayList<HarborAgent>();
 		for(int i=0; i < num_items; i++){
 			ArrayList<SellableItem> item_list = CreateItemList(i);
-			HarborAgent harbor = CreateHarbor((int)(length*x[i]),(int)(height*y[i]),item_list);
+			HarborAgent harbor = CreateHarbor((int)(width*x[i]),(int)(height*y[i]),item_list);
 			harbors.add(harbor);
 		}
 		return harbors;
@@ -45,6 +45,8 @@ public class HarborFactory {
 		return items;
 	}
 	protected HarborAgent CreateHarbor(int x, int y, ArrayList<SellableItem> items) {
+		if(x == width) x = width - 1;
+		if(y == height) y = height - 1;
 		HarborAgent harbor = new HarborAgent(x, y, items);
 		return harbor;
 	}
