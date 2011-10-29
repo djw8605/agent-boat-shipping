@@ -1,6 +1,7 @@
 package org.unl.ShippingSim;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import uchicago.src.sim.analysis.OpenSequenceGraph;
 import uchicago.src.sim.engine.SimpleModel;
@@ -55,7 +56,7 @@ public class ShippingModel extends SimpleModel {
 		this.name = "Shipping Simulation";
 		
 		boatfactory = new BoatFactory();
-		harborfactory = new HarborFactory();
+		harborfactory = new HarborFactory(SPACE_WIDTH, SPACE_HEIGHT);
 		
 		
 	}
@@ -108,21 +109,26 @@ public class ShippingModel extends SimpleModel {
 			}
 		
 		// Place and add the Harbors
-		HarborAgent harbor = harborfactory.createHarbor(space.getSizeX() / 2, 0, space);
-		agentList.add(harbor);
-		space.AddHarbor(harbor);
+		ArrayList<HarborAgent> harbors = harborfactory.CreateHarbors();
+		for (int i=0; i< harbors.size(); i++){
+			agentList.add(harbors.get(i));
+			space.AddHarbor(harbors.get(i));
+		}
+		//HarborAgent harbor = harborfactory.createHarbor(space.getSizeX() / 2, 0, space);
+		//agentList.add(harbor);
+		//space.AddHarbor(harbor);
 		
-		harbor = harborfactory.createHarbor(space.getSizeX() / 2, space.getSizeY()-1, space);
-		agentList.add(harbor);
-		space.AddHarbor(harbor);
+		//harbor = harborfactory.createHarbor(space.getSizeX() / 2, space.getSizeY()-1, space);
+		//agentList.add(harbor);
+		//space.AddHarbor(harbor);
 		
-		harbor = harborfactory.createHarbor(0, space.getSizeY() / 2, space);
-		agentList.add(harbor);
-		space.AddHarbor(harbor);
+		//harbor = harborfactory.createHarbor(0, space.getSizeY() / 2, space);
+		//agentList.add(harbor);
+		//space.AddHarbor(harbor);
 		
-		harbor = harborfactory.createHarbor(space.getSizeX()-1, space.getSizeY() / 2, space);
-		agentList.add(harbor);
-		space.AddHarbor(harbor);
+		//harbor = harborfactory.createHarbor(space.getSizeX()-1, space.getSizeY() / 2, space);
+		//agentList.add(harbor);
+		//space.AddHarbor(harbor);
 		
 		
 		buildDisplay();
