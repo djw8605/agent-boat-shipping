@@ -44,13 +44,12 @@ public class HarborAgent implements Drawable, AbstractAgent {
 	public int getX() {
 		return pos.x;
 	}
-	
 	public int getY() {
 		return pos.y;
 	}
 	
 	// do a round unload in the harbor, and return the boats go out of the queue in this round
-	public LinkedList<BoatAgent> Unload(){
+	protected LinkedList<BoatAgent> Unload(){
 		LinkedList<BoatAgent> out_boats = new LinkedList<BoatAgent>();
 		int unload_weight = unload_capability + completed_unload_weight;
 		while (boats_queue.size() > 0 && unload_weight > boats_queue.peek().getUnloadTime())
@@ -62,6 +61,13 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		if (boats_queue.size()==0) completed_unload_weight=0;
 		else completed_unload_weight = unload_weight;
 		return out_boats;
+	}
+	// update items
+	protected void UpdateItems(){
+		for(int i=0; i < items.size(); i++)
+		{
+			//items[i].Update();
+		}	
 	}
 	// add new boat to the harbor
 	public void AddBoat(BoatAgent boat){
@@ -100,7 +106,8 @@ public class HarborAgent implements Drawable, AbstractAgent {
 
 	@Override
 	public void step() {
-		
+		Unload();
+		UpdateItems();
 		// Check if the current boat should sent on it's way
 		//if ((boat_unload_counter == 0) && (boat_queue.size() > 0)) {
 		//	BoatAgent current_boat = boat_queue.pop();
