@@ -30,8 +30,9 @@ public class SellableItem {
 	}
 	// update the price and the amount of the item for each round
 	public void Update(){
-		UpdatePrice();
 		UpdateAmount();
+		UpdatePrice();
+		
 	}
 	
 	// boat buy n item from the harbor. if the trade is successful, return true, otherwise, return false
