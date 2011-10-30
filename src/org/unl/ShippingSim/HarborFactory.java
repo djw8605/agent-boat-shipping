@@ -24,6 +24,7 @@ public class HarborFactory {
 		this.width = width;
 		this.height = height;
 	}
+	// Create 4 Harbors
 	public ArrayList<HarborAgent> CreateHarbors(){
 		ArrayList<HarborAgent> harbors = new ArrayList<HarborAgent>();
 		for(int i=0; i < num_items; i++){
@@ -49,28 +50,5 @@ public class HarborFactory {
 		if(y == height) y = height - 1;
 		HarborAgent harbor = new HarborAgent(x, y, items);
 		return harbor;
-	}
-	
-//	public HarborAgent createHarbor(int x, int y, OceanSpace space) {
-//		ArrayList<SellableItem> items = createItems(numItems);
-//		HarborAgent harbor = new HarborAgent(x, y, space, items);
-//		
-//		// Do harbor initializaation
-//		return harbor;
-//	}
-//	
-//	
-//	public ArrayList<SellableItem> createItems(int numItems) {
-//		ArrayList<SellableItem> items = new ArrayList<SellableItem>();
-//		for (int i = 0; i < numItems; i++) {
-//			// Probably should do some distribution of item values and whatnot
-//			double baseline = Random.uniform.nextDoubleFromTo(50.0, 100.0);
-//			double initial_inv = Random.uniform.nextDoubleFromTo(100.0, 200.0);
-//			SellableItem item = new SellableItem((float)baseline, (float)initial_inv, 0, 0);
-//			items.add(item);
-//			
-//		}
-//		return items;
-//	}
-	
+	}	
 }
