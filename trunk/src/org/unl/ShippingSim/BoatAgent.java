@@ -82,7 +82,6 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	    
 	    // Check if we've arrived at the harbor.
 	    if ((harborx == (int)xpos) && (harbory == (int)ypos)) {
-	    	//this.target_harbor.enqueueBoat(this);
 	    	this.target_harbor.AddBoat(this);
 	    	this.loading = true;
 	    }
