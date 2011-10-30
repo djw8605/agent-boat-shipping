@@ -23,7 +23,7 @@ public class HarborAgent implements Drawable, AbstractAgent {
 	//protected int boat_unload_counter = 0;
 
 	
-	public HarborAgent(int X, int Y, OceanSpace space, ArrayList<SellableItem> Items) {
+	public HarborAgent(int X, int Y, ArrayList<SellableItem> Items) {
 		pos = new Point();
 		pos.x = X;
 		pos.y = Y;
@@ -35,8 +35,13 @@ public class HarborAgent implements Drawable, AbstractAgent {
 	}
 	
 	public ArrayList<SellableItem> getItems() {
-		return items;
+		return new ArrayList<SellableItem>(items);
 	}
+	
+	public int getBoatNum() {
+		return boats_queue.size();
+	}
+	
 	// get the position of the boat
 	public Point GetPos(){
 		return pos;
@@ -46,6 +51,40 @@ public class HarborAgent implements Drawable, AbstractAgent {
 	}
 	public int getY() {
 		return pos.y;
+	}
+	
+	// add new boat to the harbor
+	public void AddBoat(BoatAgent boat){
+		boats_queue.add(boat);
+	}
+	// get the list of boats in the harbor
+	public LinkedList<BoatAgent> GetBoatsInQueue(){
+		return new LinkedList<BoatAgent>(boats_queue);
+	}
+	
+	public void draw(SimGraphics graphic) {
+		//Draw the harbor
+		graphic.drawFastRoundRect(Color.red);
+		
+		//Draw the current prices
+			
+	}
+	
+	@Override
+	public void step() {
+		Unload();
+		UpdateItems();
+		// Check if the current boat should sent on it's way
+		//if ((boat_unload_counter == 0) && (boat_queue.size() > 0)) {
+		//	BoatAgent current_boat = boat_queue.pop();
+		//	current_boat.doneLoading();
+			
+		//	if (boat_queue.size() > 0)
+		//		boat_unload_counter = boat_queue.get(0).getUnloadTime();
+			
+		//} else if (boat_queue.size() > 0) {
+		//	boat_unload_counter -= 1;
+		//}	
 	}
 	
 	// do a round unload in the harbor, and return the boats go out of the queue in this round
@@ -66,58 +105,7 @@ public class HarborAgent implements Drawable, AbstractAgent {
 	protected void UpdateItems(){
 		for(int i=0; i < items.size(); i++)
 		{
-			//items[i].Update();
+			items.get(i).Update();
 		}	
-	}
-	// add new boat to the harbor
-	public void AddBoat(BoatAgent boat){
-		boats_queue.add(boat);
-	}
-	// get the list of boats in the harbor
-	public LinkedList<BoatAgent> GetBoatsInQueue(){
-		return new LinkedList<BoatAgent>(boats_queue);
-	}
-	
-	
-	
-	
-	
-	public void draw(SimGraphics graphic) {
-		//Draw the harbor
-		graphic.drawFastRoundRect(Color.red);
-		
-		//Draw the current prices
-			
-	}
-	
-	//public void enqueueBoat(BoatAgent boat) {
-		// Enqueue the boat to be unloaded
-	//	boat_queue.add(boat);
-		
-	//	if (boat_queue.size() == 1) {
-	//		this.boat_unload_counter = boat.getUnloadTime();
-	//	}
-		
-	//}
-
-	//public double getQueueSize() {
-	//	return (double)this.boat_queue.size();
-	//}
-
-	@Override
-	public void step() {
-		Unload();
-		UpdateItems();
-		// Check if the current boat should sent on it's way
-		//if ((boat_unload_counter == 0) && (boat_queue.size() > 0)) {
-		//	BoatAgent current_boat = boat_queue.pop();
-		//	current_boat.doneLoading();
-			
-		//	if (boat_queue.size() > 0)
-		//		boat_unload_counter = boat_queue.get(0).getUnloadTime();
-			
-		//} else if (boat_queue.size() > 0) {
-		//	boat_unload_counter -= 1;
-		//}	
 	}
 }
