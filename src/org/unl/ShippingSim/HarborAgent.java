@@ -30,6 +30,7 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		items = Items;
 		completed_unload_weight = 0;
 		boats_queue = new LinkedList<BoatAgent>();
+		unload_capability = 1;
 		
 		//boat_queue = new LinkedList<BoatAgent>();
 	}
@@ -72,19 +73,14 @@ public class HarborAgent implements Drawable, AbstractAgent {
 	
 	@Override
 	public void step() {
-		Unload();
+		
+		// Get the boats that can leave the harbor
+		LinkedList<BoatAgent> out_boats = Unload();
+		for (int i = 0; i < out_boats.size(); i++)
+			out_boats.get(i).doneLoading();
+		
+		// Update the sell times
 		UpdateItems();
-		// Check if the current boat should sent on it's way
-		//if ((boat_unload_counter == 0) && (boat_queue.size() > 0)) {
-		//	BoatAgent current_boat = boat_queue.pop();
-		//	current_boat.doneLoading();
-			
-		//	if (boat_queue.size() > 0)
-		//		boat_unload_counter = boat_queue.get(0).getUnloadTime();
-			
-		//} else if (boat_queue.size() > 0) {
-		//	boat_unload_counter -= 1;
-		//}	
 	}
 	
 	// do a round unload in the harbor, and return the boats go out of the queue in this round
