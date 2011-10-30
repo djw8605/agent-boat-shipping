@@ -83,7 +83,7 @@ public class ShippingModel extends SimpleModel {
 		queue_graph.setXViewPolicy(OpenSequenceGraph.SHOW_LAST);
 		queue_graph.setXRange(0, 1000);
 		for (int i = 0; i < space.GetHarbors().size(); i++) {
-			queue_graph.createSequence("Harbor " + Integer.toString(i), space.GetHarbors().get(i), "getQueueSize");
+			queue_graph.createSequence("Harbor " + Integer.toString(i), space.GetHarbors().get(i), "getBoatNum");
 			//queue_graph.addSequence("Harbor " + Integer.toString(i), new HarborQueueSeq(i, space));
 		}
 	}
