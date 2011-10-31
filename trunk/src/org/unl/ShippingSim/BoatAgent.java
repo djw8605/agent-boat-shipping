@@ -2,12 +2,10 @@ package org.unl.ShippingSim;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.ArrayList;
 
 import uchicago.src.sim.engine.SimpleModel;
 import uchicago.src.sim.gui.Drawable;
 import uchicago.src.sim.gui.SimGraphics;
-import uchicago.src.sim.space.Object2DGrid;
 import uchicago.src.sim.util.Random;
 
 public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
