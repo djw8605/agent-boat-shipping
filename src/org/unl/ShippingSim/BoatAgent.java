@@ -133,9 +133,11 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	 */
 	protected double CalculateExpectedProfit(int item_index, HarborAgent buy_harbor, HarborAgent sell_harbor) {
 		
-		double profit = sell_harbor.getItems().get(item_index).GetHarbor2BoatPrice() * this.size 
-				        - this.risk_factory * this.Uncertainty(buy_harbor, sell_harbor) 
-				        - this.space.GetFuelPrices() * this.size * BoatAgent.HarborDistance(buy_harbor, sell_harbor);
+		double profit = sell_harbor.getItems().get(item_index).GetBoat2HarborPrice() * this.size  	// Sell price
+						- buy_harbor.getItems().get(item_index).GetHarbor2BoatPrice() * this.size 	// Buy price
+				        - this.risk_factory * this.Uncertainty(buy_harbor, sell_harbor) 			// Uncertainty
+				        - this.space.GetFuelPrices() * this.size * BoatAgent.HarborDistance(buy_harbor, sell_harbor);  // Fuel prices
+				        
 		
 		return profit;
 	}
