@@ -114,22 +114,6 @@ public class ShippingModel extends SimpleModel {
 			agentList.add(harbors.get(i));
 			space.AddHarbor(harbors.get(i));
 		}
-		//HarborAgent harbor = harborfactory.createHarbor(space.getSizeX() / 2, 0, space);
-		//agentList.add(harbor);
-		//space.AddHarbor(harbor);
-		
-		//harbor = harborfactory.createHarbor(space.getSizeX() / 2, space.getSizeY()-1, space);
-		//agentList.add(harbor);
-		//space.AddHarbor(harbor);
-		
-		//harbor = harborfactory.createHarbor(0, space.getSizeY() / 2, space);
-		//agentList.add(harbor);
-		//space.AddHarbor(harbor);
-		
-		//harbor = harborfactory.createHarbor(space.getSizeX()-1, space.getSizeY() / 2, space);
-		//agentList.add(harbor);
-		//space.AddHarbor(harbor);
-		
 		
 		buildDisplay();
 		this.queue_graph.display();
