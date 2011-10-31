@@ -35,6 +35,12 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	
 	protected double queue_effect = 1.0;
 	
+	// The item the boat is currently holding
+	protected int item_index = 0;
+	
+	// Current money of the boat
+	protected double money = 0.0;
+	
 	
 	
 	public BoatAgent(int x, int y, OceanSpace space) {
@@ -86,6 +92,10 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	    if ((harborx == (int)xpos) && (harbory == (int)ypos)) {
 	    	this.target_harbor.AddBoat(this);
 	    	this.loading = true;
+	    	
+	    	// Sell the items we are carrying
+	    	money += this.target_harbor.getItems().get(this.item_index).HarborBuyItem(this.size);
+	    	
 	    }
 		
 	}
@@ -112,14 +122,13 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 
 	/**
 	 * Method to calculate the next harbor to travel to.
-	 * NOTE: current_harbor can be null, on first iteration
 	 */
 	protected HarborAgent CalculateNextHarbor(HarborAgent current_harbor) {
 		
 		
-		HarborAgent tmpHarbor;
 		double max_profit = Double.MIN_VALUE;
 		HarborAgent max_harbor = null;
+		int max_item = 0;
 		
 		// For each potential destination harbor
 		for (int i = 0; i < space.GetHarbors().size(); i++) {
@@ -127,14 +136,19 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			// For each item
 			for(int a = 0; a < space.GetHarbors().get(i).getItems().size(); a++) {
 				HarborAgent dest_harbor = space.GetHarbors().get(i);
+				if (dest_harbor == current_harbor) 
+					continue;
+				
 				double profit = this.CalculateExpectedProfit(a, current_harbor, dest_harbor);
-				if (profit > max_profit) {
+				if ( (profit > max_profit) && (dest_harbor.getItems().get(a).GetInventory() > this.size)) {
 					max_profit = profit;
 					max_harbor = dest_harbor;
+					max_item = a;
 				}
 			}
 		}
 		
+		PurchaseItems(max_item, max_harbor);
 		return max_harbor;
 		
 	}
@@ -142,7 +156,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	/**
 	 * Method to calculate the expected profit given item & harbor
 	 * Boat will travel from buy_harbor -> sell_harbor
-	 * @return
+	 * @return Expected profit
 	 */
 	protected double CalculateExpectedProfit(int item_index, HarborAgent buy_harbor, HarborAgent sell_harbor) {
 		
@@ -180,6 +194,21 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	protected static double HarborDistance(HarborAgent h1, HarborAgent h2) {
 		return Math.sqrt(Math.pow((h1.getX() - h2.getX()), 2) + Math.pow((h1.getY() - h2.getY()), 2));
 	}
+	
+
+	/**
+	 * Purchase these items
+	 * @param item_index
+	 * @param from_harbor
+	 * @return if purchase was successful
+	 */
+	protected boolean PurchaseItems(int item_index, HarborAgent from_harbor) {
+		SellableItem buy_item = from_harbor.getItems().get(item_index);
+		boolean purchase_success = buy_item.BoatBuyItem(this.size);
+		
+		return purchase_success;
+	}
+	
 	
 	/**
 	 * Method to get the unload time of this boat
