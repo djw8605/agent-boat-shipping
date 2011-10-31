@@ -95,18 +95,7 @@ public class ShippingModel extends SimpleModel {
 		
 		// Add new boats & harbors to the agentlist
 		
-		// Place the boats
-		for (int i = 0; i < this.numBoats; i++) {
-			  int x, y;
-			  do {
-			    x = Random.uniform.nextIntFromTo(0, space.getSizeX() - 1);
-			    y = Random.uniform.nextIntFromTo(0, space.getSizeY() - 1);
-			  } while (space.getObjectAt(x, y) != null);
-
-			  BoatAgent agent = boatfactory.CreateBoat(x, y, space);
-			  space.putObjectAt(x, y, agent);
-			  agentList.add(agent);
-			}
+		
 		
 		// Place and add the Harbors
 		ArrayList<HarborAgent> harbors = harborfactory.CreateHarbors();
@@ -115,6 +104,16 @@ public class ShippingModel extends SimpleModel {
 			space.AddHarbor(harbors.get(i));
 		}
 		
+		// Place the boats
+		for (int i = 0; i < this.numBoats; i++) {
+			HarborAgent init_harbor = harbors.get(Random.uniform.nextIntFromTo(0, harbors.size()));
+			int x = init_harbor.getX();
+			int y = init_harbor.getY();
+			BoatAgent agent = boatfactory.CreateBoat(x, y, space, init_harbor);
+			space.putObjectAt(x, y, agent);
+			agentList.add(agent);
+		}
+
 		buildDisplay();
 		this.queue_graph.display();
 		dsurf.display();

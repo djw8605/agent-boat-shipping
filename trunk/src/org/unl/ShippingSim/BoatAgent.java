@@ -117,11 +117,26 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	protected HarborAgent CalculateNextHarbor(HarborAgent current_harbor) {
 		
 		
-		//P = itemPrice(toHarbor)*boatCap - boatRiskFactor*uncertainty(atHarbor,toHarbor)-fuelPrice*size*distance(atHarbor,toHarbor)
-		//uncertainty(atHarbor,ToHarbor) = distance(atHarbor,toHarbor)*speed+queueSizeConstant*queueSize(toHarbor)
+		HarborAgent tmpHarbor;
+		double max_profit = Double.MIN_VALUE;
+		HarborAgent max_harbor = null;
 		
-		int harbor_id = Random.uniform.nextIntFromTo(0, this.space.GetHarbors().size()-1);
-		return this.space.GetHarbors().get(harbor_id);
+		// For each potential destination harbor
+		for (int i = 0; i < space.GetHarbors().size(); i++) {
+			
+			// For each item
+			for(int a = 0; a < space.GetHarbors().get(i).getItems().size(); a++) {
+				HarborAgent dest_harbor = space.GetHarbors().get(i);
+				double profit = this.CalculateExpectedProfit(a, current_harbor, dest_harbor);
+				if (profit > max_profit) {
+					max_profit = profit;
+					max_harbor = dest_harbor;
+				}
+			}
+		}
+		
+		return max_harbor;
+		
 	}
 	
 	/**
@@ -173,6 +188,15 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		return (int)this.size;
 	}
 	
+	/**
+	 * Set the current harbor
+	 * @param harbor
+	 */
+	public void SetHarbor(HarborAgent harbor) {
+		harbor.AddBoat(this);
+		this.target_harbor = harbor;
+		this.loading = true;
+	}
 	
 	public void setSize(double size) {
 		this.size = size;
