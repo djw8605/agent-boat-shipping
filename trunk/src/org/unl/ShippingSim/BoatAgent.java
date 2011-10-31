@@ -115,6 +115,9 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	protected HarborAgent CalculateNextHarbor(HarborAgent current_harbor) {
 		
 		
+		//P = itemPrice(toHarbor)*boatCap - boatRiskFactor*uncertainty(atHarbor,toHarbor)-fuelPrice*size*distance(atHarbor,toHarbor)
+		//uncertainty(atHarbor,ToHarbor) = distance(atHarbor,toHarbor)*speed+queueSizeConstant*queueSize(toHarbor)
+		
 		int harbor_id = Random.uniform.nextIntFromTo(0, this.space.GetHarbors().size()-1);
 		return this.space.GetHarbors().get(harbor_id);
 	}
