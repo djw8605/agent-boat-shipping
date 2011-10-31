@@ -10,6 +10,9 @@ public class OceanSpace extends Object2DGrid {
 	// List of harbors
 	ArrayList<HarborAgent> harbors = new ArrayList<HarborAgent>();
 	
+	// Fuel prices
+	protected double fuel_price = 1.0;
+	
 	public OceanSpace(InputStream arg0, int arg1) {
 		super(arg0, arg1);
 		// TODO Auto-generated constructor stub
@@ -24,6 +27,9 @@ public class OceanSpace extends Object2DGrid {
 		
 	}
 	
+	public double GetFuelPrices() {
+		return this.fuel_price;
+	}
 	
 	
 	// Harbor functions
