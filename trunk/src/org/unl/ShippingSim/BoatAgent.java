@@ -33,6 +33,10 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	// The size of the boat, affects unload time
 	protected double size;
 	
+	protected double risk_factory = 1.0;
+	
+	protected double queue_effect = 1.0;
+	
 	
 	
 	public BoatAgent(int x, int y, OceanSpace space) {
@@ -121,7 +125,46 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		int harbor_id = Random.uniform.nextIntFromTo(0, this.space.GetHarbors().size()-1);
 		return this.space.GetHarbors().get(harbor_id);
 	}
+	
+	/**
+	 * Method to calculate the expected profit given item & harbor
+	 * Boat will travel from buy_harbor -> sell_harbor
+	 * @return
+	 */
+	protected double CalculateExpectedProfit(int item_index, HarborAgent buy_harbor, HarborAgent sell_harbor) {
+		
+		double profit = sell_harbor.getItems().get(item_index).GetHarbor2BoatPrice() * this.size 
+				        - this.risk_factory * this.Uncertainty(buy_harbor, sell_harbor) 
+				        - this.space.GetFuelPrices() * this.size * BoatAgent.HarborDistance(buy_harbor, sell_harbor);
+		
+		return profit;
+	}
+	
+	
+	/**
+	 * Calculate the uncertainty factor
+	 * @param buy_harbor HarborAgent - Harbor that the item will be bought from
+	 * @param sell_harbor HarborAgent - Harbor the item will be sold
+	 * @return
+	 */
+	protected double Uncertainty(HarborAgent buy_harbor, HarborAgent sell_harbor) {
+		double uncertainty = 0;
+		
+		double distance = BoatAgent.HarborDistance(buy_harbor, sell_harbor);
+		uncertainty = distance * this.speed + this.queue_effect * sell_harbor.getBoatNum();
+		
+		return uncertainty;
+	}
 
+	/**
+	 * Function to get the distance between 2 harbors
+	 * @param h1 HarborAgent
+	 * @param h2 HarborAgent
+	 * @return distance
+	 */
+	protected static double HarborDistance(HarborAgent h1, HarborAgent h2) {
+		return Math.sqrt(Math.pow((h1.getX() - h2.getX()), 2) + Math.pow((h1.getY() - h2.getY()), 2));
+	}
 	
 	/**
 	 * Method to get the unload time of this boat
