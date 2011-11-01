@@ -27,6 +27,7 @@ public class SellableItem {
 	// update the amount of the item
 	protected void UpdateAmount(){
 		inventory = inventory + production_rate - consumption_rate;
+		if(inventory < 0) inventory = 0;
 	}
 	// update the price and the amount of the item for each round
 	public void Update(){
