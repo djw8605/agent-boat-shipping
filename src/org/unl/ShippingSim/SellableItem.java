@@ -7,22 +7,25 @@ public class SellableItem {
 	protected double boat2harbor_price = 0.0; // the price for the item from boat to harbor
 	
 	protected double inventory = 0.0;
+	protected double inventory_sum = 0.0; //sum inventory in all the harbors
 	protected double baseline = 0.0;
 	
 	protected double consumption_rate, production_rate;
 	
 	// initialization of SellableItem
-	public SellableItem(double baseline, double starting_inventory, double consumption_rate, double production_rate) {
+	public SellableItem(double baseline, double starting_inventory, double consumption_rate, double production_rate, double inventory_sum) {
 		this.baseline = baseline;
 		this.inventory = starting_inventory;
+		this.inventory_sum = inventory_sum;
 		this.consumption_rate = consumption_rate;
 		this.production_rate = production_rate;
 	}
 	
 	// update the price of the item
 	protected void UpdatePrice(){
-		harbor2boat_price = 5*consumption_rate - 3*production_rate - 5*(inventory/consumption_rate)  + baseline;
-		boat2harbor_price = 0.8 * harbor2boat_price;
+		//harbor2boat_price = 5*consumption_rate - 3*production_rate - 5*(inventory/consumption_rate)  + baseline;
+		harbor2boat_price = Math.tan((1.0-inventory/(inventory_sum+1))*Math.PI/2.0)+baseline*(production_rate/consumption_rate);
+		boat2harbor_price = 0.9 * harbor2boat_price;
 	}
 	// update the amount of the item
 	protected void UpdateAmount(){
