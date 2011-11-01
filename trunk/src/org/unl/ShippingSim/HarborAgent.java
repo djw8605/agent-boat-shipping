@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Queue;
-
 import uchicago.src.sim.gui.Drawable;
 import uchicago.src.sim.gui.SimGraphics;
 
