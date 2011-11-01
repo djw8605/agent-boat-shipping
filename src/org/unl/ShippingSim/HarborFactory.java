@@ -2,8 +2,6 @@ package org.unl.ShippingSim;
 
 import java.util.ArrayList;
 
-import uchicago.src.sim.util.Random;
-
 public class HarborFactory {
 
 	protected int width, height;
@@ -39,8 +37,8 @@ public class HarborFactory {
 		ArrayList<SellableItem> items= new ArrayList<SellableItem>();
 		for(int i = 0; i < num_items; i++){
 			SellableItem item;
-			if(i==n) item = new SellableItem(base_line[i], inventory[i], production_rate_best[i], consumption_rate_best[i]);
-			else item = new SellableItem(base_line[i], inventory[i], production_rate_normal[i], consumption_rate_normal[i]);
+			if(i==n) item = new SellableItem(base_line[i], inventory[i], production_rate_best[i], consumption_rate_best[i], inventory[i] * num_items);
+			else item = new SellableItem(base_line[i], inventory[i], production_rate_normal[i], consumption_rate_normal[i], inventory[i] * num_items);
 			items.add(item);
 		}
 		return items;
