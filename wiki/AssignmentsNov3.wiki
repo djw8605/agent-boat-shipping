@@ -2,6 +2,8 @@
 
 = This week's assignments =
 
+Project complete by Nov. 20
+
 == ALL ==
   # Read the seminar paper - Presenting Dec. 6
   Shoham, Y., R. Powers, and T. Grenager (2007).  If Multi-Agent Learning is the Answer, What is the Question?, Artificial Intelligence, 171(1):365-377.
