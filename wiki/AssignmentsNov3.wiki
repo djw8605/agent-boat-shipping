@@ -1,0 +1,31 @@
+#summary Assignments November 3
+
+= This week's assignments =
+
+== ALL ==
+  # Read the seminar paper - Presenting Dec. 6
+  Shoham, Y., R. Powers, and T. Grenager (2007).  If Multi-Agent Learning is the Answer, What is the Question?, Artificial Intelligence, 171(1):365-377.
+
+== Jinfu ==
+  # Add params for consumption and production rates for the harbors? 
+  # Harbor - Look at proposal experiments, make sure params allow for the experimental values
+
+== Derek ==
+  # Look into Q-Learning for boats. - Took out of proposal?
+
+== Christopher ==
+  # Boats - Look at proposal experiments, make sure params allow for the experimental values
+
+
+Next week's meeting Thursday after gameday: Nov. 10
+
+
+= Last week's assignments =
+
+== Jinfu ==
+  # Fine tune the item price calculation (tangent?) - Done
+  # Add params for consumption and production rates for the harbors? 
+
+== Derek ==
+  # Implement harbor choice in boats - Done
+  # Look into Q-Learning for boats.
