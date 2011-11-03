@@ -5,6 +5,7 @@
 == ALL ==
   # Read the seminar paper - Presenting Dec. 6
   Shoham, Y., R. Powers, and T. Grenager (2007).  If Multi-Agent Learning is the Answer, What is the Question?, Artificial Intelligence, 171(1):365-377.
+  # Split up the paper next week for presentation
 
 == Jinfu ==
   # Add params for consumption and production rates for the harbors? 
