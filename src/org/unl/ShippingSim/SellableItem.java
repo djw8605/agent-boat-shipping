@@ -32,11 +32,11 @@ public class SellableItem {
 		inventory = inventory + production_rate - consumption_rate;
 		if(inventory < 0) inventory = 0;
 	}
-	// update the price and the amount of the item for each round
+	// update the price and the amount of the item
+	// required to call this function every round
 	public void Update(){
 		UpdateAmount();
-		UpdatePrice();
-		
+		UpdatePrice();	
 	}
 	
 	// boat buy n item from the harbor. if the trade is successful, return true, otherwise, return false
