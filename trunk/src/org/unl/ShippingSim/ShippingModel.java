@@ -43,6 +43,12 @@ public class ShippingModel extends SimpleModel {
 	// Harbor queue graphs
 	protected OpenSequenceGraph queue_graph;
 	
+	// Item Price Graphs
+	protected OpenSequenceGraph[] price_graphs ={ 	new OpenSequenceGraph("Harbor 1 Prices", this), 
+													new OpenSequenceGraph("Harbor 2 Prices", this),
+													new OpenSequenceGraph("Harbor 3 Prices", this), 
+													new OpenSequenceGraph("Harbor 4 Prices", this)};
+	
 	public final static int SPACE_WIDTH = 100;
 	public final static int SPACE_HEIGHT = 100;
 	
@@ -86,6 +92,14 @@ public class ShippingModel extends SimpleModel {
 			queue_graph.createSequence("Harbor " + Integer.toString(i), space.GetHarbors().get(i), "getBoatNum");
 			//queue_graph.addSequence("Harbor " + Integer.toString(i), new HarborQueueSeq(i, space));
 		}
+		
+		//price_graphs = new OpenSequenceGraph[4];
+		for (int i = 0; i < space.GetHarbors().size(); i++) {
+			for (int a = 0; a < space.GetHarbors().get(i).getItems().size(); a++) {
+				SellableItem item = space.GetHarbors().get(i).getItems().get(a);
+				price_graphs[i].createSequence("Harbor " + Integer.toString(i) + ": Item " + Integer.toString(a), item, "GetHarbor2BoatPrice");
+			}
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -106,7 +120,7 @@ public class ShippingModel extends SimpleModel {
 		
 		// Place the boats
 		for (int i = 0; i < this.numBoats; i++) {
-			HarborAgent init_harbor = harbors.get(Random.uniform.nextIntFromTo(0, harbors.size()));
+			HarborAgent init_harbor = harbors.get(Random.uniform.nextIntFromTo(0, harbors.size()-1));
 			int x = init_harbor.getX();
 			int y = init_harbor.getY();
 			BoatAgent agent = boatfactory.CreateBoat(x, y, space, init_harbor);
@@ -116,6 +130,8 @@ public class ShippingModel extends SimpleModel {
 
 		buildDisplay();
 		this.queue_graph.display();
+		for(int i = 0; i < this.price_graphs.length; i++)
+			this.price_graphs[i].display();
 		dsurf.display();
 	}
 
@@ -132,6 +148,8 @@ public class ShippingModel extends SimpleModel {
 		if ((stepper % 100) == 0) {
 			stepper = 0;
 			this.queue_graph.step();
+			for (int i = 0; i < this.price_graphs.length; i++)
+				this.price_graphs[i].step();
 		}
 		stepper++;
 		
