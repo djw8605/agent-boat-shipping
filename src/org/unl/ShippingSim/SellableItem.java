@@ -24,7 +24,8 @@ public class SellableItem {
 	// update the price of the item
 	protected void UpdatePrice(){
 		//harbor2boat_price = 5*consumption_rate - 3*production_rate - 5*(inventory/consumption_rate)  + baseline;
-		harbor2boat_price = Math.tan((1.0-inventory/(inventory_sum+1))*Math.PI/2.0)+baseline*(consumption_rate/production_rate);
+		harbor2boat_price = Math.pow(.92, inventory/1000.0) * baseline;
+		//harbor2boat_price = Math.tan((1.0-inventory/(inventory_sum+1))*Math.PI/2.0)+baseline*(consumption_rate/production_rate);
 		boat2harbor_price = 0.9 * harbor2boat_price;
 	}
 	// update the amount of the item
