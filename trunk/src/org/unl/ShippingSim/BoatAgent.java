@@ -31,7 +31,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	// The size of the boat, affects unload time
 	protected double size;
 	
-	protected double risk_factory = 1.0;
+	protected double risk_factor = 1.0;
 	
 	protected double queue_effect = 1.0;
 	
@@ -75,8 +75,8 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		double distance = Math.sqrt((Math.pow(a, 2) +  Math.pow(b, 2)));
 		
 		// This is basically doing an inverse sin/cos to find the new position.
-		double new_xpos = this.speed * (a/distance) + xpos;
-		double new_ypos = this.speed * (b/distance) + ypos;
+		double new_xpos = this.speed * (a/(distance+1)) + xpos;
+		double new_ypos = this.speed * (b/(distance+1)) + ypos;
 
 
 		space.putObjectAt((int)xpos, (int)ypos, null);
@@ -89,12 +89,14 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 
 	    
 	    // Check if we've arrived at the harbor.
-	    if ((harborx == (int)xpos) && (harbory == (int)ypos)) {
+	    if ((harborx == Math.round(xpos)) && (harbory == Math.round(ypos))) {
 	    	this.target_harbor.AddBoat(this);
 	    	this.loading = true;
 	    	
 	    	// Sell the items we are carrying
-	    	money += this.target_harbor.getItems().get(this.item_index).HarborBuyItem(this.size);
+	    	if (this.item_index >= 0) {
+	    		money += this.target_harbor.getItems().get(this.item_index).HarborBuyItem(this.size);
+	    	}
 	    	
 	    }
 		
@@ -132,15 +134,16 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		
 		// For each potential destination harbor
 		for (int i = 0; i < space.GetHarbors().size(); i++) {
+			HarborAgent dest_harbor = space.GetHarbors().get(i);
 			
 			// For each item
 			for(int a = 0; a < space.GetHarbors().get(i).getItems().size(); a++) {
-				HarborAgent dest_harbor = space.GetHarbors().get(i);
 				if (dest_harbor == current_harbor) 
 					continue;
 				
 				double profit = this.CalculateExpectedProfit(a, current_harbor, dest_harbor);
-				if ( (profit > max_profit) && (dest_harbor.getItems().get(a).GetInventory() > this.size)) {
+				SellableItem item = current_harbor.getItems().get(a);
+				if ( (profit > max_profit) && (item.GetInventory() > this.size)) {
 					max_profit = profit;
 					max_harbor = dest_harbor;
 					max_item = a;
@@ -148,8 +151,14 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			}
 		}
 		
-		PurchaseItems(max_item, max_harbor);
-		return max_harbor;
+		if (max_harbor == null) {
+			this.item_index = -1;
+			return this.target_harbor;
+		} else {
+			PurchaseItems(max_item, max_harbor);
+			this.item_index = max_item;
+			return max_harbor;
+		}
 		
 	}
 	
@@ -160,11 +169,14 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	 */
 	protected double CalculateExpectedProfit(int item_index, HarborAgent buy_harbor, HarborAgent sell_harbor) {
 		
-		double profit = sell_harbor.getItems().get(item_index).GetBoat2HarborPrice() * this.size  	// Sell price
-						- buy_harbor.getItems().get(item_index).GetHarbor2BoatPrice() * this.size 	// Buy price
-				        - this.risk_factory * this.Uncertainty(buy_harbor, sell_harbor) 			// Uncertainty
-				        - this.space.GetFuelPrices() * this.size * BoatAgent.HarborDistance(buy_harbor, sell_harbor);  // Fuel prices
-				        
+		double profit = 0.0;
+		
+		double sell_price = sell_harbor.getItems().get(item_index).GetBoat2HarborPrice() * this.size;
+		double buy_price = buy_harbor.getItems().get(item_index).GetHarbor2BoatPrice() * this.size;
+		double uncertainty = this.risk_factor * this.Uncertainty(buy_harbor, sell_harbor);
+		double fuelprices =  this.space.GetFuelPrices() * this.size * BoatAgent.HarborDistance(buy_harbor, sell_harbor);
+		
+		profit = sell_price - buy_price - uncertainty - fuelprices;
 		
 		return profit;
 	}
@@ -214,7 +226,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	 * Method to get the unload time of this boat
 	 */
 	public int getUnloadTime() {
-		return (int)this.size;
+		return (int)this.size/10;
 	}
 	
 	/**
