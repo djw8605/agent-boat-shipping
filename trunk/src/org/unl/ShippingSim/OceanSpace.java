@@ -11,7 +11,7 @@ public class OceanSpace extends Object2DGrid {
 	ArrayList<HarborAgent> harbors = new ArrayList<HarborAgent>();
 	
 	// Fuel prices
-	protected double fuel_price = 1.0;
+	protected double fuel_price = 0.2;
 	
 	public OceanSpace(InputStream arg0, int arg1) {
 		super(arg0, arg1);
