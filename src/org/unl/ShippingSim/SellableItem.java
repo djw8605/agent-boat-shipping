@@ -44,12 +44,14 @@ public class SellableItem {
 	public boolean BoatBuyItem(double n){
 		if(n > inventory) return false;
 		inventory -= n;
+		UpdatePrice();
 		return true;
 	}
 	
 	// harbor buy n item from boat, and return the total price for this trade
 	public double HarborBuyItem(double n){
 		inventory += n;
+		UpdatePrice();
 		return n * boat2harbor_price;
 	}
 	
