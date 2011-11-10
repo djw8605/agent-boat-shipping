@@ -97,6 +97,9 @@ public class ShippingModel extends SimpleModel {
 		for (int i = 0; i < space.GetHarbors().size(); i++) {
 			for (int a = 0; a < space.GetHarbors().get(i).getItems().size(); a++) {
 				SellableItem item = space.GetHarbors().get(i).getItems().get(a);
+				price_graphs[i].setXViewPolicy(OpenSequenceGraph.SHOW_LAST);
+				price_graphs[i].setXRange(0, 1000);
+				//price_graphs[i].createSequence("Harbor " + Integer.toString(i) + ": Item " + Integer.toString(a), item, "GetInventory");
 				price_graphs[i].createSequence("Harbor " + Integer.toString(i) + ": Item " + Integer.toString(a), item, "GetHarbor2BoatPrice");
 			}
 		}
