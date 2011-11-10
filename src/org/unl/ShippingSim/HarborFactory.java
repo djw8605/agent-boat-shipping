@@ -14,8 +14,8 @@ public class HarborFactory {
 	protected double consumption_rate_best[] = {2,2,2,2};
 	protected double consumption_rate_normal[] = {2,2,2,2};
 	
-	protected double x[] = {0,0.5,0.5,1};
-	protected double y[] = {0.5,0,1,0.5};
+	protected double x[] = {0.5,1,0.5,0};
+	protected double y[] = {0,0.5,1,0.5};
 	
 	// Initialize HarborFactory
 	public HarborFactory(int width, int height) {
