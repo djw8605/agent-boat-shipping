@@ -1,0 +1,76 @@
+#summary Assignments for Nov. 21
+
+= This week's assignments =
+
+Meeting next Monday Nov. 28 at 8pm
+
+*Seminar Powerpoint due next Monday's meeting.*
+Seminar Presentation Dec. 6.
+
+Be sure to use the notes section of powerpoint.
+
+
+== Christopher ==
+  # Split number of boats by boat size, will involve work in BoatFactory and ShippingModel
+  # Add fuel price param work - Work in ShippingModel (add param) and OceanSpace (change parameter)
+
+== Jinfu ==
+  # Baseline needs to be passed harbor factory of sellablitem initialization.
+
+== Derek ==
+  # Uncertainty distribution
+  # Record boat profit
+
+= Lasts week's assignments =
+
+*Record Profit of the boats*
+
+Next meeting is Nov. 21 ~8pm
+Project should be done, and experiments starting at this point.
+
+== Christopher ==
+  # Split number of boats by boat size, will involve work in BoatFactory and ShippingModel
+  # Add fuel price param work - Work in ShippingModel (add param) and OceanSpace (change parameter)
+
+
+== Jinfu ==
+  # Baseline needs to be passed harbor factory of sellablitem initialization.
+
+== Derek ==
+  # Implement far-sight - Done
+
+  # Queue effect needs to be passed to boats - Done
+
+
+
+= Last Week's Assignments = 
+Project complete by Nov. 20
+
+== ALL ==
+  # Read the seminar paper - Presenting Dec. 6
+  Shoham, Y., R. Powers, and T. Grenager (2007).  If Multi-Agent Learning is the Answer, What is the Question?, Artificial Intelligence, 171(1):365-377.
+  # Split up the paper next week for presentation
+
+== Jinfu ==
+  # Add params for consumption and production rates for the harbors? 
+  # Harbor - Look at proposal experiments, make sure params allow for the experimental values
+
+== Derek ==
+  # Look into Q-Learning for boats. - Took out of proposal?
+
+== Christopher ==
+  # Boats - Look at proposal experiments, make sure params allow for the experimental values
+
+
+Next week's meeting Thursday after gameday: Nov. 10
+
+
+= Last week's assignments =
+
+== Jinfu ==
+  # Fine tune the item price calculation (tangent?) - Done
+  # Add params for consumption and production rates for the harbors? 
+
+== Derek ==
+  # Implement harbor choice in boats - Done
+  # Look into Q-Learning for boats.
