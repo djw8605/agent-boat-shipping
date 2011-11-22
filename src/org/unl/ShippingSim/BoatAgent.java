@@ -334,6 +334,14 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		this.risk_factor = uncertainty;
 	}
 	
+	/**
+	 * The farsight level
+	 */
+	public void setFarsight(int farsight) {
+		this.farsight = farsight;
+	}
+	
+	
 	@Override
 	public int getX() {
 		return (int)this.xpos;
