@@ -7,6 +7,10 @@ public class BoatFactory {
 
 	protected float queueeffect = 0;
 	
+	public enum Distributions { NORMAL, UNIFORM, BINOMIAL, LOG, POISSON }
+	
+	protected Distributions uncertainty_distrubtion;
+	
 	// Initialization
 	public BoatFactory() {
 		
@@ -21,6 +25,7 @@ public class BoatFactory {
 		b.setSize(boat_size);
 		b.SetHarbor(init_harbor);
 		b.setQueueEffect(this.queueeffect);
+		
 		return b;
 		
 	}

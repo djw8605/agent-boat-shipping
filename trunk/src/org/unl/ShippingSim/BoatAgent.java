@@ -250,6 +250,12 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		this.queue_effect = queue_effect;
 	}
 	
+	/**
+	 * Set uncertainty effect
+	 */
+	public void setUncertainty(double uncertainty) {
+		this.risk_factor = uncertainty;
+	}
 	
 	@Override
 	public int getX() {
