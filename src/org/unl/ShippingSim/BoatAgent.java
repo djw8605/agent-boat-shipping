@@ -243,6 +243,12 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		this.size = size;
 	}
 	
+	/**
+	 * Set the queue effect
+	 */
+	public void setQueueEffect(float queue_effect) {
+		this.queue_effect = queue_effect;
+	}
 	
 	
 	@Override
