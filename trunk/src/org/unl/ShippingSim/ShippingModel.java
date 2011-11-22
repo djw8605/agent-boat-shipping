@@ -112,6 +112,7 @@ public class ShippingModel extends SimpleModel {
 		
 		// Add the attributes to the model
 		boatfactory.SetQueueEffect(this.queueImpact);
+		boatfactory.setFarSight(farsight);
 		
 		// Add new boats & harbors to the agentlist
 		
