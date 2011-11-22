@@ -11,6 +11,8 @@ public class BoatFactory {
 	
 	protected Distributions uncertainty_distrubtion;
 	
+	protected int farsight = 1;
+	
 	// Initialization
 	public BoatFactory() {
 		
@@ -25,7 +27,7 @@ public class BoatFactory {
 		b.setSize(boat_size);
 		b.SetHarbor(init_harbor);
 		b.setQueueEffect(this.queueeffect);
-		
+		b.setFarsight(this.farsight);
 		return b;
 		
 	}
@@ -34,5 +36,8 @@ public class BoatFactory {
 		this.queueeffect = queueeffect;
 	}
 	
+	public void setFarSight(int farsight) {
+		this.farsight = farsight;
+	}
 	
 }
