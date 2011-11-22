@@ -41,6 +41,9 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	// Current money of the boat
 	protected double money = 0.0;
 	
+	// Farsight into the future
+	protected int farsight = 1;
+	
 	
 	
 	public BoatAgent(int x, int y, OceanSpace space) {
@@ -119,6 +122,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		
 		// Calculate the next harbor to go to
 		this.target_harbor = CalculateNextHarbor(this.target_harbor);
+
 	}
 	
 
@@ -133,33 +137,106 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		int max_item = 0;
 		
 		// For each potential destination harbor
-		for (int i = 0; i < space.GetHarbors().size(); i++) {
-			HarborAgent dest_harbor = space.GetHarbors().get(i);
-			
-			// For each item
-			for(int a = 0; a < space.GetHarbors().get(i).getItems().size(); a++) {
-				if (dest_harbor == current_harbor) 
-					continue;
-				
-				double profit = this.CalculateExpectedProfit(a, current_harbor, dest_harbor);
-				SellableItem item = current_harbor.getItems().get(a);
-				if ( (profit > max_profit) && (item.GetInventory() > this.size)) {
-					max_profit = profit;
-					max_harbor = dest_harbor;
-					max_item = a;
-				}
-			}
-		}
 		
-		if (max_harbor == null) {
+		MaxProfitData profit_data = this.ForsightProfit(current_harbor, this.farsight);
+		
+		
+		if ((profit_data.next_harbor == null) || (profit_data.next_harbor == current_harbor) || (profit_data.profit < 1)) {
 			this.item_index = -1;
 			return this.target_harbor;
 		} else {
-			PurchaseItems(max_item, max_harbor);
-			this.item_index = max_item;
-			return max_harbor;
+			PurchaseItems(profit_data.item_index, current_harbor);
+			this.item_index = profit_data.item_index;
+			return profit_data.next_harbor;
 		}
 		
+	}
+	
+	/**
+	 * Struct to hold data for max profit functions
+	 */
+	public class MaxProfitData {
+		public double profit;
+		public int item_index;
+		public HarborAgent next_harbor;
+	}
+	
+	
+	/**
+	 * Recursive function to get max profit with forsight
+	 * @return HarborAgent - Next harbor that should be visited
+	 */
+	protected MaxProfitData ForsightProfit(HarborAgent harbor_src, int depth) {
+		
+		MaxProfitData data = new MaxProfitData();
+		data.profit = Double.MIN_VALUE;
+		data.next_harbor = harbor_src;
+		data.item_index = -1;
+		
+		// Reached depth, return 0
+		if (depth == 0)
+			return data;
+		
+		// Loop through each harbor
+		for (int i = 0; i < space.GetHarbors().size(); i++) {
+			HarborAgent harbor_dest = space.GetHarbors().get(i);
+			
+			if(harbor_src == harbor_dest)
+				continue;
+			
+			MaxProfitData round_data = this.GetMaxProfit(harbor_src, harbor_dest);
+			MaxProfitData future_value = ForsightProfit(harbor_dest, depth-1);
+			MaxProfitData combined_values = new MaxProfitData();
+			combined_values.profit = round_data.profit + future_value.profit;
+			
+			if (data.profit < combined_values.profit) {
+				data.profit = combined_values.profit;
+				data.next_harbor = harbor_dest;
+				data.item_index = round_data.item_index;
+			}
+			
+		}
+		
+		return data;
+		
+	}
+	
+	
+	/** 
+	 * Calculate the maximum profit one can get from harbor_a to harbor_b
+	 */
+	protected MaxProfitData GetMaxProfit(HarborAgent harbor_src, HarborAgent harbor_dest) {
+		MaxProfitData data = new MaxProfitData();
+		double max_profit = Double.MIN_VALUE;
+		HarborAgent max_harbor;
+		int max_item = 0;
+		
+		if (harbor_src == harbor_dest) {
+			data.profit = Double.MIN_VALUE;
+			return data;
+		}
+
+		
+		for(int a = 0; a < harbor_src.getItems().size(); a++) {
+			
+			double profit = 0.0;
+
+			profit = this.CalculateExpectedProfit(a, harbor_src, harbor_dest);
+			SellableItem item = harbor_src.getItems().get(a);
+			if (item.GetInventory() < this.size) {
+				continue;
+			}
+			if (profit > max_profit) {
+				max_profit = profit;
+				max_harbor = harbor_dest;
+				max_item = a;
+
+			}
+		}
+		data = new MaxProfitData();
+		data.profit = max_profit;
+		data.item_index = max_item;
+		return data;
 	}
 	
 	/**
