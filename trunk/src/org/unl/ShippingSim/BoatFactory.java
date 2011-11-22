@@ -5,6 +5,8 @@ import uchicago.src.sim.util.Random;
 
 public class BoatFactory {
 
+	protected float queueeffect = 0;
+	
 	// Initialization
 	public BoatFactory() {
 		
@@ -18,9 +20,13 @@ public class BoatFactory {
 		float boat_size = Random.uniform.nextFloatFromTo(100, 300);
 		b.setSize(boat_size);
 		b.SetHarbor(init_harbor);
-		
+		b.setQueueEffect(this.queueeffect);
 		return b;
 		
+	}
+	
+	public void SetQueueEffect(float queueeffect) {
+		this.queueeffect = queueeffect;
 	}
 	
 	

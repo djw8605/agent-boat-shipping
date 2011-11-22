@@ -110,6 +110,9 @@ public class ShippingModel extends SimpleModel {
 		// Initialize the simulation space
 		space = new OceanSpace(ShippingModel.SPACE_WIDTH, ShippingModel.SPACE_HEIGHT);
 		
+		// Add the attributes to the model
+		boatfactory.SetQueueEffect(this.queueImpact);
+		
 		// Add new boats & harbors to the agentlist
 		
 		
