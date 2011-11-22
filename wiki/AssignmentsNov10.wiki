@@ -18,7 +18,7 @@ Project should be done, and experiments starting at this point.
 == Derek ==
   # Implement far-sight
   # Uncertainty distribution
-  # Queue effect needs to be passed to boats
+  # Queue effect needs to be passed to boats - Done
 
 
 
