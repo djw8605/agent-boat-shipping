@@ -22,6 +22,13 @@ public class HarborFactory {
 		this.width = width;
 		this.height = height;
 	}
+	//Set Baseline of items
+	public void SetBaseline(double baseline[]){
+		int length = this.base_line.length;
+		for(int i=0;i<length;i++){
+			this.base_line[i]=baseline[i];
+		}
+	}
 	// Create 4 Harbors
 	public ArrayList<HarborAgent> CreateHarbors(){
 		ArrayList<HarborAgent> harbors = new ArrayList<HarborAgent>();
