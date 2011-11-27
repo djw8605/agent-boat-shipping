@@ -26,6 +26,16 @@ public class BoatFactory {
 		
 	}
 	
+	
+	/**
+	 * Create a boat
+	 * @param x - int x location
+	 * @param y - int y location
+	 * @param space - Global space for a global view.  Only contains a limited view.
+	 * @param init_harbor - Initial harbor
+	 * @param boat_size - starting size of the boat.  Should be one of the constants defined above.
+	 * @return
+	 */
 	public BoatAgent CreateBoat(int x, int y, OceanSpace space, HarborAgent init_harbor, double boat_size) {
 		BoatAgent b = new BoatAgent(x, y, space);
 		// Do the initialization stuff
@@ -44,10 +54,18 @@ public class BoatFactory {
 		
 	}
 	
+	/**
+	 * Set the queue effect
+	 * @param queueeffect
+	 */
 	public void SetQueueEffect(float queueeffect) {
 		this.queueeffect = queueeffect;
 	}
 	
+	/**
+	 * Set the farsight of the boats
+	 * @param farsight
+	 */
 	public void setFarSight(int farsight) {
 		this.farsight = farsight;
 	}
