@@ -11,8 +11,8 @@ Be sure to use the notes section of powerpoint.
 
 
 == Christopher ==
-  # Split number of boats by boat size, will involve work in BoatFactory and ShippingModel
-  # Add fuel price param work - Work in ShippingModel (add param) and OceanSpace (change parameter)
+  # Split number of boats by boat size, will involve work in BoatFactory and ShippingModel - Done
+  # Add fuel price param work - Work in ShippingModel (add param) and OceanSpace (change parameter) - Done
 
 == Jinfu ==
   # Baseline needs to be passed harbor factory of sellablitem initialization.
