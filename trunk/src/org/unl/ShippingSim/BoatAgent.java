@@ -205,7 +205,6 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			
 			// Each depth further should count less and less, more uncertain about future prices
 			double future_discount_factor = (1/(Math.pow(this.farsight - (depth-1), 0.2)));
-			System.out.println("Depth = " + depth + "; discount = " + future_discount_factor);
 			combined_values.profit = round_data.profit * future_discount_factor + future_value.profit;
 			
 			if (data.profit < combined_values.profit) {
