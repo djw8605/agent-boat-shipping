@@ -378,5 +378,12 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		this.boat_size_enum = size_enum;
 	}
 	
+	/**
+	 * Return the profit that the boat has earned
+	 */
+	public double getMoney() {
+		return this.money;
+	}
+	
 
 }

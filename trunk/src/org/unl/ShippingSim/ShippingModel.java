@@ -49,6 +49,12 @@ public class ShippingModel extends SimpleModel {
 													new OpenSequenceGraph("Harbor 3 Prices", this), 
 													new OpenSequenceGraph("Harbor 4 Prices", this)};
 	
+	// Harbor queue graphs
+	protected OpenSequenceGraph per_boatsize_profit_graph;
+		
+	// Harbor queue graphs
+	protected OpenSequenceGraph total_profit_graph;
+	
 	// Number of small boats
 	protected int numSmallBoats;
 	
@@ -113,6 +119,17 @@ public class ShippingModel extends SimpleModel {
 				price_graphs[i].createSequence("Harbor " + Integer.toString(i) + ": Item " + Integer.toString(a), item, "GetHarbor2BoatPrice");
 			}
 		}
+		
+		this.per_boatsize_profit_graph = new OpenSequenceGraph("Per Boat Profit", this);
+		this.per_boatsize_profit_graph.setXViewPolicy(OpenSequenceGraph.SHOW_ALL);
+		this.per_boatsize_profit_graph.createSequence("Small", this.boatfactory, "getSmallBoatProfit");
+		this.per_boatsize_profit_graph.createSequence("Medium", this.boatfactory, "getMediumBoatProfit");
+		this.per_boatsize_profit_graph.createSequence("Large", this.boatfactory, "getLargeBoatProfit");
+		
+		this.total_profit_graph = new OpenSequenceGraph("Total Boat Profit", this);
+		this.total_profit_graph.setXViewPolicy(OpenSequenceGraph.SHOW_ALL);
+		this.total_profit_graph.createSequence("All Boats", this.boatfactory, "getBoatProfit");
+		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -171,6 +188,9 @@ public class ShippingModel extends SimpleModel {
 		this.queue_graph.display();
 		for(int i = 0; i < this.price_graphs.length; i++)
 			this.price_graphs[i].display();
+		
+		this.per_boatsize_profit_graph.display();
+		this.total_profit_graph.display();
 		dsurf.display();
 	}
 
@@ -189,6 +209,8 @@ public class ShippingModel extends SimpleModel {
 			this.queue_graph.step();
 			for (int i = 0; i < this.price_graphs.length; i++)
 				this.price_graphs[i].step();
+			this.per_boatsize_profit_graph.step();
+			this.total_profit_graph.step();
 		}
 		stepper++;
 		
