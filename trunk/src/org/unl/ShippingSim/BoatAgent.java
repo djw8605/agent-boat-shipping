@@ -231,7 +231,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			return data;
 		}
 
-		
+		// Loop through each available item
 		for(int a = 0; a < harbor_src.getItems().size(); a++) {
 			
 			double profit = 0.0;
