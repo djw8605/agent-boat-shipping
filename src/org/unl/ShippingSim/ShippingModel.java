@@ -49,16 +49,26 @@ public class ShippingModel extends SimpleModel {
 													new OpenSequenceGraph("Harbor 3 Prices", this), 
 													new OpenSequenceGraph("Harbor 4 Prices", this)};
 	
+	// Number of small boats
+	protected int numSmallBoats;
+	
+	// Number of medium boats
+	protected int numMediumBoats;
+	
+	// Number of large boats
+	protected int numLargeBoats;
+	
 	public final static int SPACE_WIDTH = 100;
 	public final static int SPACE_HEIGHT = 100;
 	
 	public ShippingModel() {
-		this.params = new String [] {"NumberBoats",
-									 "BaselineItem1",
-									 "ShipProportion",
+		this.params = new String [] {"BaselineItem1",
 									 "FuelPrice",
 									 "QueueImpact",
-									 "FarSight"};
+									 "FarSight",
+									 "SmallBoats",
+									 "MediumBoats",
+									 "LargeBoats"};
 		this.name = "Shipping Simulation";
 		
 		boatfactory = new BoatFactory();
@@ -86,8 +96,8 @@ public class ShippingModel extends SimpleModel {
 		dsurf.setBackground(Color.blue);
 		
 		queue_graph = new OpenSequenceGraph("Harbor Queues", this);
-		queue_graph.setXViewPolicy(OpenSequenceGraph.SHOW_LAST);
-		queue_graph.setXRange(0, 1000);
+		queue_graph.setXViewPolicy(OpenSequenceGraph.SHOW_ALL);
+		//queue_graph.setXRange(0, 1000);
 		for (int i = 0; i < space.GetHarbors().size(); i++) {
 			queue_graph.createSequence("Harbor " + Integer.toString(i), space.GetHarbors().get(i), "getBoatNum");
 			//queue_graph.addSequence("Harbor " + Integer.toString(i), new HarborQueueSeq(i, space));
@@ -97,8 +107,8 @@ public class ShippingModel extends SimpleModel {
 		for (int i = 0; i < space.GetHarbors().size(); i++) {
 			for (int a = 0; a < space.GetHarbors().get(i).getItems().size(); a++) {
 				SellableItem item = space.GetHarbors().get(i).getItems().get(a);
-				price_graphs[i].setXViewPolicy(OpenSequenceGraph.SHOW_LAST);
-				price_graphs[i].setXRange(0, 1000);
+				price_graphs[i].setXViewPolicy(OpenSequenceGraph.SHOW_ALL);
+				//price_graphs[i].setXRange(0, 1000);
 				//price_graphs[i].createSequence("Harbor " + Integer.toString(i) + ": Item " + Integer.toString(a), item, "GetInventory");
 				price_graphs[i].createSequence("Harbor " + Integer.toString(i) + ": Item " + Integer.toString(a), item, "GetHarbor2BoatPrice");
 			}
@@ -126,14 +136,36 @@ public class ShippingModel extends SimpleModel {
 		}
 		
 		// Place the boats
-		for (int i = 0; i < this.numBoats; i++) {
+		// Small boats
+		for (int i = 0; i < this.numSmallBoats; i++) {
 			HarborAgent init_harbor = harbors.get(Random.uniform.nextIntFromTo(0, harbors.size()-1));
 			int x = init_harbor.getX();
 			int y = init_harbor.getY();
-			BoatAgent agent = boatfactory.CreateBoat(x, y, space, init_harbor);
+			BoatAgent agent = boatfactory.CreateBoat(x, y, space, init_harbor, BoatFactory.SMALL_BOAT);
 			space.putObjectAt(x, y, agent);
 			agentList.add(agent);
 		}
+		
+		// Medium boats
+		for (int i = 0; i < this.numSmallBoats; i++) {
+			HarborAgent init_harbor = harbors.get(Random.uniform.nextIntFromTo(0, harbors.size()-1));
+			int x = init_harbor.getX();
+			int y = init_harbor.getY();
+			BoatAgent agent = boatfactory.CreateBoat(x, y, space, init_harbor, BoatFactory.MEDIUM_BOAT);
+			space.putObjectAt(x, y, agent);
+			agentList.add(agent);
+		}
+		
+		// Large boats
+		for (int i = 0; i < this.numSmallBoats; i++) {
+			HarborAgent init_harbor = harbors.get(Random.uniform.nextIntFromTo(0, harbors.size()-1));
+			int x = init_harbor.getX();
+			int y = init_harbor.getY();
+			BoatAgent agent = boatfactory.CreateBoat(x, y, space, init_harbor, BoatFactory.LARGE_BOAT);
+			space.putObjectAt(x, y, agent);
+			agentList.add(agent);
+		}
+		
 
 		buildDisplay();
 		this.queue_graph.display();
@@ -215,5 +247,30 @@ public class ShippingModel extends SimpleModel {
 		return this.farsight;
 	}
 	
+	// How far in the future the boat will look (far sight)
+	public void setSmallBoats(int val) {
+		this.numSmallBoats = val;
+	}
+	public int getSmallBoats() {
+		return this.numSmallBoats;
+	}
+	
+	// How far in the future the boat will look (far sight)
+	public void setMediumBoats(int val) {
+		this.numMediumBoats = val;
+	}
+
+	public int getMediumBoats() {
+		return this.numMediumBoats;
+	}
+
+	// How far in the future the boat will look (far sight)
+	public void setLargeBoats(int val) {
+		this.numLargeBoats = val;
+	}
+
+	public int getLargeBoats() {
+		return this.numLargeBoats;
+	}
 
 }
