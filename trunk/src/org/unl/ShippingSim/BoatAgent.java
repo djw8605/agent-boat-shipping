@@ -184,7 +184,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	protected MaxProfitData ForsightProfit(HarborAgent harbor_src, int depth) {
 		
 		MaxProfitData data = new MaxProfitData();
-		data.profit = Double.MIN_VALUE;
+		data.profit = 0;
 		data.next_harbor = harbor_src;
 		data.item_index = -1;
 		
@@ -202,7 +202,11 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			MaxProfitData round_data = this.GetMaxProfit(harbor_src, harbor_dest);
 			MaxProfitData future_value = ForsightProfit(harbor_dest, depth-1);
 			MaxProfitData combined_values = new MaxProfitData();
-			combined_values.profit = round_data.profit + future_value.profit;
+			
+			// Each depth further should count less and less, more uncertain about future prices
+			double future_discount_factor = (1/(Math.pow(this.farsight - (depth-1), 0.2)));
+			System.out.println("Depth = " + depth + "; discount = " + future_discount_factor);
+			combined_values.profit = round_data.profit * future_discount_factor + future_value.profit;
 			
 			if (data.profit < combined_values.profit) {
 				data.profit = combined_values.profit;
