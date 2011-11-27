@@ -7,7 +7,13 @@ public class BoatFactory {
 
 	protected float queueeffect = 0;
 	
-	public enum Distributions { NORMAL, UNIFORM, BINOMIAL, LOG, POISSON }
+	public enum Distributions { NORMAL, UNIFORM, BINOMIAL, LOG, POISSON };
+	
+	public enum BoatSizes { SMALL, MEDIUM, LARGE };
+	
+	public static final double SMALL_BOAT = 50.0;
+	public static final double MEDIUM_BOAT = 150.0;
+	public static final double LARGE_BOAT = 300.0;
 	
 	protected Distributions uncertainty_distrubtion;
 	
@@ -20,14 +26,20 @@ public class BoatFactory {
 		
 	}
 	
-	public BoatAgent CreateBoat(int x, int y, OceanSpace space, HarborAgent init_harbor) {
+	public BoatAgent CreateBoat(int x, int y, OceanSpace space, HarborAgent init_harbor, double boat_size) {
 		BoatAgent b = new BoatAgent(x, y, space);
 		// Do the initialization stuff
-		float boat_size = Random.uniform.nextFloatFromTo(100, 300);
-		b.setSize(boat_size);
+		float calculated_boat_size = Random.uniform.nextFloatFromTo((float)boat_size - 20, (float)boat_size + 20);
+		b.setSize(calculated_boat_size);
 		b.SetHarbor(init_harbor);
 		b.setQueueEffect(this.queueeffect);
 		b.setFarsight(this.farsight);
+		if (boat_size == SMALL_BOAT)
+			b.setSizeEnum(BoatSizes.SMALL);
+		else if (boat_size == MEDIUM_BOAT)
+			b.setSizeEnum(BoatSizes.MEDIUM);
+		else if (boat_size == LARGE_BOAT)
+			b.setSizeEnum(BoatSizes.LARGE);
 		return b;
 		
 	}

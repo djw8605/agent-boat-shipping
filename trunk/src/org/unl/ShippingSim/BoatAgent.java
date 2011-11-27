@@ -44,6 +44,8 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	// Farsight into the future
 	protected int farsight = 1;
 	
+	protected BoatFactory.BoatSizes boat_size_enum;
+	
 	
 	
 	public BoatAgent(int x, int y, OceanSpace space) {
@@ -108,8 +110,15 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	public void draw(SimGraphics g) {
 		
 		// Only draw the boat if it's not in harbor
-		if (this.loading == false)
-			g.drawFastRoundRect(Color.green);
+		if (this.loading == false) {
+			if (this.boat_size_enum == BoatFactory.BoatSizes.SMALL)
+				g.drawFastRoundRect(Color.green);
+			else if (this.boat_size_enum == BoatFactory.BoatSizes.MEDIUM)
+				g.drawFastRoundRect(Color.yellow);
+			else if (this.boat_size_enum == BoatFactory.BoatSizes.LARGE)
+				g.drawFastRoundRect(Color.red);
+		}
+			
 	}
 	
 	/**
@@ -352,5 +361,13 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	public int getY() {
 		return (int)this.ypos;
 	}
+	
+	/**
+	 * The size (enum) of the boat
+	 */
+	public void setSizeEnum(BoatFactory.BoatSizes size_enum) {
+		this.boat_size_enum = size_enum;
+	}
+	
 
 }
