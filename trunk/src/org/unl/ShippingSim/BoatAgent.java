@@ -44,6 +44,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	// Farsight into the future
 	protected int farsight = 1;
 	
+	// Boat size enum.
 	protected BoatFactory.BoatSizes boat_size_enum;
 	
 	
@@ -60,7 +61,9 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 
 	}
 	
-	
+	/**
+	 * Step the boats
+	 */
 	public void step() {
 		
 		// If we're loading, don't do anything
@@ -107,6 +110,9 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		
 	}
 	
+	/**
+	 * Draw the ship
+	 */
 	public void draw(SimGraphics g) {
 		
 		// Only draw the boat if it's not in harbor
