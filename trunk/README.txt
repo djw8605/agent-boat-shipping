@@ -6,7 +6,7 @@ Source is available from svn at:
 https://agent-boat-shipping.googlecode.com/svn/trunk/
 
 This project is a shipping market simulation.  Boats travel from harbor to
-harbor in order to sell godds for a profit.
+harbor in order to sell goods for a profit.
 
 Documentation to install the project into eclipse can be found on the project 
 website:
