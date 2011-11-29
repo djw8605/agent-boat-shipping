@@ -178,7 +178,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	
 	
 	/**
-	 * Recursive function to get max profit with forsight
+	 * Recursive function to get max profit with foresight
 	 * @return HarborAgent - Next harbor that should be visited
 	 */
 	protected MaxProfitData ForsightProfit(HarborAgent harbor_src, int depth) {
