@@ -49,8 +49,11 @@ public class ShippingModel extends SimpleModel {
 													new OpenSequenceGraph("Harbor 3 Prices", this), 
 													new OpenSequenceGraph("Harbor 4 Prices", this)};
 	
-	// Harbor queue graphs
+	// Harbor per boat profit graphs
 	protected OpenSequenceGraph per_boatsize_profit_graph;
+	
+	// Harbor avg profit graphs
+	protected OpenSequenceGraph avg_profit_graph;
 		
 	// Harbor queue graphs
 	protected OpenSequenceGraph total_profit_graph;
@@ -64,6 +67,12 @@ public class ShippingModel extends SimpleModel {
 	// Number of large boats
 	protected int numLargeBoats;
 	
+	// The center of the risk distribution
+	protected double risk_center;
+	
+	// Range of the risk distribution (normal distribution)
+	protected double risk_range = 1.0;
+	
 	public final static int SPACE_WIDTH = 100;
 	public final static int SPACE_HEIGHT = 100;
 	
@@ -74,7 +83,9 @@ public class ShippingModel extends SimpleModel {
 									 "FarSight",
 									 "SmallBoats",
 									 "MediumBoats",
-									 "LargeBoats"};
+									 "LargeBoats",
+									 "RiskCenter",
+									 "RiskRange"};
 		this.name = "Shipping Simulation";
 		
 		boatfactory = new BoatFactory();
@@ -130,6 +141,12 @@ public class ShippingModel extends SimpleModel {
 		this.total_profit_graph.setXViewPolicy(OpenSequenceGraph.SHOW_ALL);
 		this.total_profit_graph.createSequence("All Boats", this.boatfactory, "getBoatProfit");
 		
+		this.avg_profit_graph = new OpenSequenceGraph("Avg Boat Profit", this);
+		this.avg_profit_graph.setXViewPolicy(OpenSequenceGraph.SHOW_ALL);
+		this.avg_profit_graph.createSequence("Small", this.boatfactory, "getSmallBoatAvgProfit");
+		this.avg_profit_graph.createSequence("Medium", this.boatfactory, "getMediumBoatAvgProfit");
+		this.avg_profit_graph.createSequence("Large", this.boatfactory, "getLargeBoatAvgProfit");
+		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -164,7 +181,7 @@ public class ShippingModel extends SimpleModel {
 		}
 		
 		// Medium boats
-		for (int i = 0; i < this.numSmallBoats; i++) {
+		for (int i = 0; i < this.numMediumBoats; i++) {
 			HarborAgent init_harbor = harbors.get(Random.uniform.nextIntFromTo(0, harbors.size()-1));
 			int x = init_harbor.getX();
 			int y = init_harbor.getY();
@@ -174,7 +191,7 @@ public class ShippingModel extends SimpleModel {
 		}
 		
 		// Large boats
-		for (int i = 0; i < this.numSmallBoats; i++) {
+		for (int i = 0; i < this.numLargeBoats; i++) {
 			HarborAgent init_harbor = harbors.get(Random.uniform.nextIntFromTo(0, harbors.size()-1));
 			int x = init_harbor.getX();
 			int y = init_harbor.getY();
@@ -191,6 +208,7 @@ public class ShippingModel extends SimpleModel {
 		
 		this.per_boatsize_profit_graph.display();
 		this.total_profit_graph.display();
+		this.avg_profit_graph.display();
 		dsurf.display();
 	}
 
@@ -211,6 +229,7 @@ public class ShippingModel extends SimpleModel {
 				this.price_graphs[i].step();
 			this.per_boatsize_profit_graph.step();
 			this.total_profit_graph.step();
+			this.avg_profit_graph.step();
 		}
 		stepper++;
 		
@@ -269,7 +288,7 @@ public class ShippingModel extends SimpleModel {
 		return this.farsight;
 	}
 	
-	// How far in the future the boat will look (far sight)
+	// Set number of small boats
 	public void setSmallBoats(int val) {
 		this.numSmallBoats = val;
 	}
@@ -277,7 +296,7 @@ public class ShippingModel extends SimpleModel {
 		return this.numSmallBoats;
 	}
 	
-	// How far in the future the boat will look (far sight)
+	// Set number of medium boats
 	public void setMediumBoats(int val) {
 		this.numMediumBoats = val;
 	}
@@ -286,7 +305,7 @@ public class ShippingModel extends SimpleModel {
 		return this.numMediumBoats;
 	}
 
-	// How far in the future the boat will look (far sight)
+	// Set number of large boats
 	public void setLargeBoats(int val) {
 		this.numLargeBoats = val;
 	}
@@ -294,5 +313,28 @@ public class ShippingModel extends SimpleModel {
 	public int getLargeBoats() {
 		return this.numLargeBoats;
 	}
+	
+	// Center of boat's risk distribution
+	public void setRiskCenter(double val) {
+		this.risk_center = val;
+	}
+	
+	public double getRiskCenter() {
+		return this.risk_center;
+	}
+	
+	public void setRiskRange(double val) {
+		this.risk_range = val;
+	}
+	
+	public double getRiskRange() {
+		return this.risk_range;
+	}
+	
+	
+	// Baseline values
+	
+	
+	
 
 }
