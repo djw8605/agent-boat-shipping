@@ -2,6 +2,9 @@ CSCE 875 Multi-agent systems project.
 
 Project webpage: https://code.google.com/p/agent-boat-shipping/
 
+Source is available from svn at:
+https://agent-boat-shipping.googlecode.com/svn/trunk/
+
 This project is a shipping market simulation.  Boats travel from harbor to
 harbor in order to sell godds for a profit.
 
