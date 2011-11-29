@@ -1,0 +1,60 @@
+<project name="AgentShipping" basedir="." default="run">
+    <property name="lib.dir" location="lib"/>   
+    <property name="build.dir" location="build/classes"/>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+    <pathconvert property="manifest.classpath" pathsep=" ">
+        <path refid="classpath"/>
+        <mapper>
+            <chainedmapper>
+                <flattenmapper/>
+                <globmapper from="*.jar" to="lib/*.jar"/>
+            </chainedmapper>
+        </mapper>
+    </pathconvert>
+    <pathconvert property="run.classpath" pathsep=":">
+        <path refid="classpath"/>
+        <mapper>
+            <chainedmapper>
+                <flattenmapper/>
+                <globmapper from="*.jar" to="lib/*.jar"/>
+            </chainedmapper>
+        </mapper>
+    </pathconvert>
+
+
+    <target name="compile">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="src" destdir="${build.dir}" classpathref="classpath"/>
+	
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/AgentShipping.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="uchicago.src.sim.engine.SimInit"/>
+		<attribute name="Class-Path" value="${manifest.classpath}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="compile,jar">
+        
+        <java classname="uchicago.src.sim.engine.SimInit" fork="true">
+            <classpath>
+            <pathelement path="${run.classpath}"/>
+            <pathelement path="${build.dir}"/>
+            </classpath>
+            <arg value="org.unl.ShippingSim.ShippingModel"/>
+        </java>
+        
+    </target>
+
+</project>
