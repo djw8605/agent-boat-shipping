@@ -38,6 +38,31 @@ ant compile
 Running can be done with Ant as well (because huge classpath list):
 ant run
 
+Configuration variables for the simulation.
+
+Fuel price for each boat.  Larger boats require more fuel.
+FuelPrice
+
+Impact of the queue on the boat's risk analysis.
+QueueImpact
+
+How far in the future the boats will look when searching for the most profitable
+route from harbor to harbor.
+FarSight
+
+Number of boats by size.
+SmallBoats
+MediumBoats
+LargeBoats
+
+The risk for each boat.  Risk is used in calculations for which harbor to go to
+in order to sell items.  When a harbor's queue is large, there is larger risk that
+the price will change before the boat is able to unload and sell it's items.  Also
+the time to travel to another harbor introduces another risk.  Risk is a normal
+distribution with a center at RiskCenter, and range at RiskRange.
+RiskCenter
+RiskRange
+
 
 
 
