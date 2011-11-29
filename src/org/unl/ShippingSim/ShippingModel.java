@@ -152,6 +152,7 @@ public class ShippingModel extends SimpleModel {
 	@SuppressWarnings("unchecked")
 	public void buildModel() {
 		// Initialize the simulation space
+		Random.createUniform();
 		space = new OceanSpace(ShippingModel.SPACE_WIDTH, ShippingModel.SPACE_HEIGHT);
 		
 		// Add the attributes to the model
