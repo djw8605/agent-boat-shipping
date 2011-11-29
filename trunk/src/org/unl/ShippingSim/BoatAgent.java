@@ -336,6 +336,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	
 	public void setSize(double size) {
 		this.size = size;
+		this.speed = 30 / size;
 	}
 	
 	/**

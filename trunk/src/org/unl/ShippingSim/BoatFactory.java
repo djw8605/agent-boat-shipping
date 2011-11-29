@@ -19,12 +19,17 @@ public class BoatFactory {
 	
 	protected Distributions uncertainty_distrubtion;
 	
+	// Arrays to aggregate profits from different subsets of boats
 	protected ArrayList<BoatAgent> all_boats = new ArrayList<BoatAgent>();
 	protected ArrayList<BoatAgent> small_boats = new ArrayList<BoatAgent>();
 	protected ArrayList<BoatAgent> medium_boats = new ArrayList<BoatAgent>();
 	protected ArrayList<BoatAgent> large_boats = new ArrayList<BoatAgent>();
 	
 	protected int farsight = 1;
+	
+	// Center of risk distribution
+	protected double risk_center;
+	protected double risk_range;
 	
 	// Initialization
 	public BoatFactory() {
@@ -51,6 +56,8 @@ public class BoatFactory {
 		b.SetHarbor(init_harbor);
 		b.setQueueEffect(this.queueeffect);
 		b.setFarsight(this.farsight);
+		double risk = Random.uniform.nextDoubleFromTo(this.risk_center - this.risk_range, this.risk_center + this.risk_range);
+		b.setUncertainty(risk);
 		
 		// Add the boats for profit aggregation (graphing)
 		this.all_boats.add(b);
@@ -82,6 +89,14 @@ public class BoatFactory {
 	 */
 	public void setFarSight(int farsight) {
 		this.farsight = farsight;
+	}
+	
+	/**
+	 * Set the boat risk factor and range
+	 */
+	public void setRiskCenter(double risk_center, double risk_range) {
+		this.risk_center = risk_center;
+		this.risk_range = risk_range;
 	}
 	
 	/**
@@ -123,6 +138,44 @@ public class BoatFactory {
 			total_profit += this.all_boats.get(i).getMoney();
 		return total_profit;
 	}
+	
+	
+	/**
+	 * Get the average profit from small boats
+	 */
+	public double getSmallBoatAvgProfit() {
+		double total_profit = 0.0;
+		for (int i = 0; i < this.small_boats.size(); i++)
+			total_profit += this.small_boats.get(i).getMoney();
+		return total_profit / (double)this.small_boats.size();
+		
+	}
+
+	/**
+	 * Get the average profit from medium boats
+	 */
+	public double getMediumBoatAvgProfit() {
+		double total_profit = 0.0;
+		for (int i = 0; i < this.medium_boats.size(); i++)
+			total_profit += this.medium_boats.get(i).getMoney();
+		return total_profit / (double)this.medium_boats.size();
+	}
+	
+	/**
+	 * Get the average profit from large boats
+	 */
+	public double getLargeBoatAvgProfit() {
+		double total_profit = 0.0;
+		for (int i = 0; i < this.large_boats.size(); i++)
+			total_profit += this.large_boats.get(i).getMoney();
+		return total_profit / (double) this.large_boats.size();
+	}
+	
+
+	
+	
+	
+
 	
 	
 }
