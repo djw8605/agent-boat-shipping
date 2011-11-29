@@ -20,13 +20,13 @@ public class ShippingModel extends SimpleModel {
 	protected float shipSizeProportion;
 	
 	// Fuel price
-	protected float fuelPrice;
+	protected float fuelPrice = (float)1.0;
 	
 	// Impact of long queues
-	protected float queueImpact;
+	protected float queueImpact = (float)1.0;
 	
 	// How far in the future the boats will look
-	protected int farsight;
+	protected int farsight = 1;
 	
 	// The simulation space
 	protected OceanSpace space;
@@ -59,16 +59,16 @@ public class ShippingModel extends SimpleModel {
 	protected OpenSequenceGraph total_profit_graph;
 	
 	// Number of small boats
-	protected int numSmallBoats;
+	protected int numSmallBoats = 50;
 	
 	// Number of medium boats
-	protected int numMediumBoats;
+	protected int numMediumBoats = 50;
 	
 	// Number of large boats
-	protected int numLargeBoats;
+	protected int numLargeBoats = 50;
 	
 	// The center of the risk distribution
-	protected double risk_center;
+	protected double risk_center = 1.0;
 	
 	// Range of the risk distribution (normal distribution)
 	protected double risk_range = 1.0;
