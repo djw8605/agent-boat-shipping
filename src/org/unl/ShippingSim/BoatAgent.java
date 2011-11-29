@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import uchicago.src.sim.engine.SimpleModel;
 import uchicago.src.sim.gui.Drawable;
 import uchicago.src.sim.gui.SimGraphics;
-import uchicago.src.sim.util.Random;
 
 public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 
@@ -146,11 +145,6 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	 */
 	protected HarborAgent CalculateNextHarbor(HarborAgent current_harbor) {
 		
-		
-		double max_profit = Double.MIN_VALUE;
-		HarborAgent max_harbor = null;
-		int max_item = 0;
-		
 		// For each potential destination harbor
 		
 		MaxProfitData profit_data = this.ForsightProfit(current_harbor, this.farsight);
@@ -226,6 +220,9 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	protected MaxProfitData GetMaxProfit(HarborAgent harbor_src, HarborAgent harbor_dest) {
 		MaxProfitData data = new MaxProfitData();
 		double max_profit = Double.MIN_VALUE;
+		
+		// Suppress warning, because it is used below, silly java
+		@SuppressWarnings("unused")
 		HarborAgent max_harbor;
 		int max_item = 0;
 		
