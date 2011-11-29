@@ -17,10 +17,12 @@ public class HarborAgent implements Drawable, AbstractAgent {
 	protected int completed_unload_weight; // the completed weight of the unload of the top boat (the boat may need more than one round to finish its unload)
 	
 	
-	//protected LinkedList<BoatAgent> boat_queue;
-	//protected int boat_unload_counter = 0;
-
-	
+	/**
+	 * Function to initialize HarborAgent
+	 * @param X - x coordinate of HarborAgent
+	 * @param Y - y coordinate of HarborAgent
+	 * @param Items - items in this HarborAgent
+	 */
 	public HarborAgent(int X, int Y, ArrayList<SellableItem> Items) {
 		pos = new Point();
 		pos.x = X;
@@ -29,14 +31,16 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		completed_unload_weight = 0;
 		boats_queue = new LinkedList<BoatAgent>();
 		unload_capability = 1;
-		
-		//boat_queue = new LinkedList<BoatAgent>();
 	}
-	
+	/**
+	 * Function to get item list
+	 */
 	public ArrayList<SellableItem> getItems() {
 		return new ArrayList<SellableItem>(items);
 	}
-	
+	/**
+	 * Function to get number of boat in the queue
+	 */
 	public int getBoatNum() {
 		return boats_queue.size();
 	}
@@ -52,21 +56,24 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		return pos.y;
 	}
 	
-	// add new boat to the harbor
+	/**
+	 * Function to add new boat to the harbor
+	 */
 	public void AddBoat(BoatAgent boat){
 		boats_queue.add(boat);
 	}
-	// get the list of boats in the harbor
+	/**
+	 * Function to get the list of boats in the harbor
+	 */
 	public LinkedList<BoatAgent> GetBoatsInQueue(){
 		return new LinkedList<BoatAgent>(boats_queue);
 	}
 	
+	/**
+	 * Function to draw the harbor
+	 */
 	public void draw(SimGraphics graphic) {
-		//Draw the harbor
-		graphic.drawFastRoundRect(Color.red);
-		
-		//Draw the current prices
-			
+		graphic.drawFastRoundRect(Color.red);	
 	}
 	
 	@Override
@@ -80,8 +87,10 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		// Update the sell times
 		UpdateItems();
 	}
-	
-	// do a round unload in the harbor, and return the boats go out of the queue in this round
+	/**
+	 * Function to process unload in one round
+	 * @return the boats go out of the queue in this round
+	 */
 	protected LinkedList<BoatAgent> Unload(){
 		LinkedList<BoatAgent> out_boats = new LinkedList<BoatAgent>();
 		int unload_weight = unload_capability + completed_unload_weight;
@@ -95,7 +104,9 @@ public class HarborAgent implements Drawable, AbstractAgent {
 		else completed_unload_weight = unload_weight;
 		return out_boats;
 	}
-	// update items
+	/**
+	 * Function to update items in the list
+	 */
 	protected void UpdateItems(){
 		for(int i=0; i < items.size(); i++)
 		{
