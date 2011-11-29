@@ -32,11 +32,11 @@ Building of the package is done with Apache Ant:
 https://ant.apache.org/
 
 To compile:
-ant compile
+$ ant compile
 
 = RUNNING =
 Running can be done with Ant as well (because huge classpath list):
-ant run
+$ ant run
 
 Configuration variables for the simulation.
 
