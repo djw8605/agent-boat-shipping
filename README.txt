@@ -26,3 +26,19 @@ Classes:
  SellableItem	Class that represents an item that a boat can buy/sell.
  ShippingModel	Simulation class that creates the simulation variables and graphs.
 
+
+= BUILDING =
+Building of the package is done with Apache Ant:
+https://ant.apache.org/
+
+To compile:
+ant compile
+
+= RUNNING =
+Running can be done with Ant as well (because huge classpath list):
+ant run
+
+
+
+
+
