@@ -3,9 +3,8 @@ package org.unl.ShippingSim;
 import java.util.ArrayList;
 
 public class HarborFactory {
-
-	protected int width, height;
-	//arguments for each item
+	
+	//arguments for initializing items
 	protected int num_items = 4;
 	protected double base_line[] = {10000,10000,20000,20000};
 	protected double inventory[] = {10000,10000,10000,10000};
@@ -14,22 +13,33 @@ public class HarborFactory {
 	protected double consumption_rate_best[] = {2,2,2,2};
 	protected double consumption_rate_normal[] = {2,2,2,2};
 	
+	//arguments for initializing the positions of harbors
+	protected int width, height;
 	protected double x[] = {0.5,1,0.5,0};
 	protected double y[] = {0,0.5,1,0.5};
 	
-	// Initialize HarborFactory
+	/**
+	 * Function to initialize HarborFactory
+	 */
 	public HarborFactory(int width, int height) {
 		this.width = width;
 		this.height = height;
 	}
-	//Set Baseline of items
+
+	/**
+	 * Function to set Baseline of items
+	 */
 	public void SetBaseline(double baseline[]){
 		int length = this.base_line.length;
 		for(int i=0;i<length;i++){
 			this.base_line[i]=baseline[i];
 		}
 	}
-	// Create 4 Harbors
+	
+	/**
+	 * Function to create 4 Harbors
+	 * @return list of harbors
+	 */
 	public ArrayList<HarborAgent> CreateHarbors(){
 		ArrayList<HarborAgent> harbors = new ArrayList<HarborAgent>();
 		for(int i=0; i < num_items; i++){
@@ -39,6 +49,11 @@ public class HarborFactory {
 		}
 		return harbors;
 	}
+	/**
+	 * Function to one item list
+	 * @param n - the index of the item which is "special" in the item list
+	 * @return list of items
+	 */
 	protected ArrayList<SellableItem> CreateItemList(int n)
 	{
 		ArrayList<SellableItem> items= new ArrayList<SellableItem>();
@@ -50,6 +65,14 @@ public class HarborFactory {
 		}
 		return items;
 	}
+	
+	/**
+	 * Function to create a new harbor
+	 * @param x - x coordinate of the new harbor
+	 * @param y - y coordinate of the new harbor
+	 * @param items - item list for the new harbor
+	 * @return the new harbor
+	 */
 	protected HarborAgent CreateHarbor(int x, int y, ArrayList<SellableItem> items) {
 		if(x == width) x = width - 1;
 		if(y == height) y = height - 1;
