@@ -77,8 +77,7 @@ public class ShippingModel extends SimpleModel {
 	public final static int SPACE_HEIGHT = 100;
 	
 	public ShippingModel() {
-		this.params = new String [] {"BaselineItem1",
-									 "FuelPrice",
+		this.params = new String [] {"FuelPrice",
 									 "QueueImpact",
 									 "FarSight",
 									 "SmallBoats",
@@ -131,6 +130,7 @@ public class ShippingModel extends SimpleModel {
 			}
 		}
 		
+		// Graph initialization stuff...
 		this.per_boatsize_profit_graph = new OpenSequenceGraph("Per Boat Profit", this);
 		this.per_boatsize_profit_graph.setXViewPolicy(OpenSequenceGraph.SHOW_ALL);
 		this.per_boatsize_profit_graph.createSequence("Small", this.boatfactory, "getSmallBoatProfit");
