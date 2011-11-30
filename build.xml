@@ -35,17 +35,37 @@
 	
     </target>
 
-    <target name="jar" depends="compile">
+    <target name="jar-unstripped" depends="compile">
         <mkdir dir="build/jar"/>
-        <jar destfile="build/jar/AgentShipping.jar" basedir="build/classes">
+        <jar destfile="build/jar/AgentShippingUnstripped.jar" basedir="build/classes" >
+            <zipgroupfileset dir="${lib.dir}" />
             <manifest>
                 <attribute name="Main-Class" value="uchicago.src.sim.engine.SimInit"/>
 		<attribute name="Class-Path" value="${manifest.classpath}"/>
             </manifest>
         </jar>
     </target>
+   
+   <target name="jar" depends="jar-unstripped">
+      <jar destfile="build/jar/AgentShipping.jar">
+          <zipfileset src="build/jar/AgentShippingUnstripped.jar" excludes="META-INF/SUN_MICR.RSA,META-INF/SUN_MICR.SF"/>
+            <manifest>
+                <attribute name="Main-Class" value="uchicago.src.sim.engine.SimInit"/>
+		<attribute name="Class-Path" value="${manifest.classpath}"/>
+            </manifest>
 
-    <target name="run" depends="compile,jar">
+      </jar>
+
+   </target>
+
+    <target name="run-jar" depends="jar">
+       <java jar="build/jar/AgentShipping.jar" fork="true">
+           <arg value="org.unl.ShippingSim.ShippingModel"/>
+       </java>
+    </target>
+
+
+    <target name="run" depends="compile">
         
         <java classname="uchicago.src.sim.engine.SimInit" fork="true">
             <classpath>
