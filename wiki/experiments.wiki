@@ -1,0 +1,31 @@
+#summary experiments
+
+= Experiments =
+Screenshots of profit and avg profit
+
+Paper sections and experiments done next Thursday, Dec. 8.
+
+Meeting Monday Dec 5. for practice seminar at 7pm.  Meet in AVH 347.
+
+POJI, POJI, POJI...
+
+== Chris == 
+  # Boat sizes 300 boats total system, percentages of other boat sizes.   
+  # Fuel Prices
+
+== Jinfu ==
+  # number of boats
+  # Impact of longer queues (queue effect)
+  # Farsightness
+
+== Derek ==
+  # Uncertainty 
+
+= Paper Assignments =
+
+Derek - Implementation
+
+Introduction - Chris
+Implementation - Derek
+Evaluation - Group effort
+Conclusion - Jinfu
