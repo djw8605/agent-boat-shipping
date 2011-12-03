@@ -156,6 +156,7 @@ public class ShippingModel extends SimpleModel {
 		space = new OceanSpace(ShippingModel.SPACE_WIDTH, ShippingModel.SPACE_HEIGHT);
 		
 		// Add the attributes to the model
+		boatfactory.setRiskCenter(this.risk_center, this.risk_range);
 		boatfactory.SetQueueEffect(this.queueImpact);
 		boatfactory.setFarSight(farsight);
 		
