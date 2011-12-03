@@ -308,7 +308,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	 */
 	protected boolean PurchaseItems(int item_index, HarborAgent from_harbor) {
 		SellableItem buy_item = from_harbor.getItems().get(item_index);
-        this.money -= from_harbor.getItems().get(item_index).GetHarbor2BoatPrice() * this.size;
+        //this.money -= from_harbor.getItems().get(item_index).GetHarbor2BoatPrice() * this.size;
 		boolean purchase_success = buy_item.BoatBuyItem(this.size);
 		
 		return purchase_success;
