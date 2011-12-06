@@ -232,6 +232,9 @@ public class ShippingModel extends SimpleModel {
 			this.per_boatsize_profit_graph.step();
 			this.total_profit_graph.step();
 			this.avg_profit_graph.step();
+			System.out.println("Small Boat Profit: " + Double.toString(this.boatfactory.getSmallBoatProfit()));
+			System.out.println("Medium Boat Profit: " + Double.toString(this.boatfactory.getMediumBoatProfit()));
+			System.out.println("Large Boat Profit: " + Double.toString(this.boatfactory.getLargeBoatProfit()));
 		}
 		stepper++;
 		
