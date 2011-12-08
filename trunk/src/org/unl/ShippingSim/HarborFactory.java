@@ -6,12 +6,12 @@ public class HarborFactory {
 	
 	//arguments for initializing items
 	protected int num_items = 4;
-	protected double base_line[] = {100,100,200,200};
-	protected double inventory[] = {1000,1000,1000,1000};
+	protected double base_line[] = {100,100,100,100};
+	protected double inventory[] = {10000,10000,10000,10000};
 	protected double production_rate_best[] = {9,9,9,9};
-	protected double production_rate_normal[] = {1,1,1,1};
+	protected double production_rate_normal[] = {0,0,0,0};
 	protected double consumption_rate_best[] = {0,0,0,0};
-	protected double consumption_rate_normal[] = {4,4,4,4};
+	protected double consumption_rate_normal[] = {3,3,3,3};
 	
 	//arguments for initializing the positions of harbors
 	protected int width, height;
