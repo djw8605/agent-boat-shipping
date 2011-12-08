@@ -44,10 +44,10 @@ public class ShippingModel extends SimpleModel {
 	protected OpenSequenceGraph queue_graph;
 	
 	// Item Price Graphs
-	protected OpenSequenceGraph[] price_graphs ={ 	new OpenSequenceGraph("Harbor 1 Prices", this), 
-													new OpenSequenceGraph("Harbor 2 Prices", this),
-													new OpenSequenceGraph("Harbor 3 Prices", this), 
-													new OpenSequenceGraph("Harbor 4 Prices", this)};
+	protected OpenSequenceGraph[] price_graphs ={ 	new OpenSequenceGraph("Harbor 0 Prices", this), 
+													new OpenSequenceGraph("Harbor 1 Prices", this),
+													new OpenSequenceGraph("Harbor 2 Prices", this), 
+													new OpenSequenceGraph("Harbor 3 Prices", this)};
 	
 	// Harbor per boat profit graphs
 	protected OpenSequenceGraph per_boatsize_profit_graph;
