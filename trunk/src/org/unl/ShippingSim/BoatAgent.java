@@ -51,6 +51,8 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	
 	protected double purchased_price = 0.0;
 	
+	protected int number_buys = 0;
+	
 	
 	
 	public BoatAgent(int x, int y, OceanSpace space) {
@@ -160,6 +162,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			return this.target_harbor;
 		} else {
 			PurchaseItems(profit_data.item_index, current_harbor);
+			this.number_buys++;
 			this.expected_profit = profit_data.profit;
 			this.item_index = profit_data.item_index;
 			return profit_data.next_harbor;
@@ -400,10 +403,17 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		
 		
 		double remote_profit = (target_harbor.getItems().get(this.item_index).GetBoat2HarborPrice() * this.size) - this.purchased_price;
-		System.out.println("Expected profit = " + this.expected_profit);
-		System.out.println("Remote profit = " + remote_profit);
+		//System.out.println("Expected profit = " + this.expected_profit);
+		//System.out.println("Remote profit = " + remote_profit);
 		return remote_profit - this.expected_profit;
 		
+	}
+	
+	/**
+	 * Get number of harbors visited
+	 */
+	public int getHarborsVisited() {
+		return this.number_buys;
 	}
 
 }

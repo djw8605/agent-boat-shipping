@@ -241,9 +241,13 @@ public class ShippingModel extends SimpleModel {
 			this.total_profit_graph.step();
 			this.avg_profit_graph.step();
 			
+			double [] avg_visited = this.boatfactory.getAverageHarborsVisited();
 			System.out.println("Small Boat Profit: " + Double.toString(this.boatfactory.getSmallBoatProfit()));
+			System.out.println("Small Boat Avg Harbors: " + Double.toString(avg_visited[0]));
 			System.out.println("Medium Boat Profit: " + Double.toString(this.boatfactory.getMediumBoatProfit()));
+			System.out.println("Medium Boat Avg Harbors: " + Double.toString(avg_visited[1]));
 			System.out.println("Large Boat Profit: " + Double.toString(this.boatfactory.getLargeBoatProfit()));
+			System.out.println("Large Boat Avg Harbors: " + Double.toString(avg_visited[2]));
 		}
 		stepper++;
 		
