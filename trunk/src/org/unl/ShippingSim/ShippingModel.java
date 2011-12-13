@@ -285,6 +285,7 @@ public class ShippingModel extends SimpleModel {
 	// Fuel prices
 	public void setFuelPrice(float val) {
 		this.fuelPrice = val;
+		this.space.SetFuelPrices(val);
 	}
 	public float getFuelPrice() {
 		return this.fuelPrice;
