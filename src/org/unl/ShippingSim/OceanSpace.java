@@ -31,6 +31,10 @@ public class OceanSpace extends Object2DGrid {
 		return this.fuel_price;
 	}
 	
+	public void SetFuelPrices(double fuel_price) {
+		this.fuel_price = fuel_price;
+	}
+	
 	
 	// Harbor functions
 	public void AddHarbor(HarborAgent harbor) {
