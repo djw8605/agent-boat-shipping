@@ -399,7 +399,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			return 0.0;
 		
 		
-		double remote_profit = target_harbor.getItems().get(this.item_index).GetBoat2HarborPrice() - this.purchased_price;
+		double remote_profit = (target_harbor.getItems().get(this.item_index).GetBoat2HarborPrice() * this.size) - this.purchased_price;
 		System.out.println("Expected profit = " + this.expected_profit);
 		System.out.println("Remote profit = " + remote_profit);
 		return remote_profit - this.expected_profit;
