@@ -161,6 +161,7 @@ public class ShippingModel extends SimpleModel {
 		// Initialize the simulation space
 		Random.createUniform();
 		space = new OceanSpace(ShippingModel.SPACE_WIDTH, ShippingModel.SPACE_HEIGHT);
+		space.SetFuelPrices(this.fuelPrice);
 		
 		// Add the attributes to the model
 		boatfactory.setRiskCenter(this.risk_center, this.risk_range);
@@ -285,7 +286,6 @@ public class ShippingModel extends SimpleModel {
 	// Fuel prices
 	public void setFuelPrice(float val) {
 		this.fuelPrice = val;
-		this.space.SetFuelPrices(val);
 	}
 	public float getFuelPrice() {
 		return this.fuelPrice;
