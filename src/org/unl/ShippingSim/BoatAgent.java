@@ -46,6 +46,9 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	// Boat size enum.
 	protected BoatFactory.BoatSizes boat_size_enum;
 	
+	// Current expected profit
+	protected double expected_profit = 0.0;
+	
 	
 	
 	public BoatAgent(int x, int y, OceanSpace space) {
@@ -155,6 +158,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			return this.target_harbor;
 		} else {
 			PurchaseItems(profit_data.item_index, current_harbor);
+			this.expected_profit = profit_data.profit;
 			this.item_index = profit_data.item_index;
 			return profit_data.next_harbor;
 		}
@@ -384,5 +388,16 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 		return this.money;
 	}
 	
+	/**
+	 * Get Profit diff
+	 */
+	public double getProfitDiff() {
+		if (target_harbor == null || this.item_index == -1) 
+			return 0.0;
+		
+		double remote_profit = target_harbor.getItems().get(this.item_index).GetBoat2HarborPrice();
+		return remote_profit - this.expected_profit;
+		
+	}
 
 }

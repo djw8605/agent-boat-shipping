@@ -58,6 +58,9 @@ public class ShippingModel extends SimpleModel {
 	// Harbor queue graphs
 	protected OpenSequenceGraph total_profit_graph;
 	
+	// boat expected profit graph
+	protected OpenSequenceGraph expected_profit_graph;
+	
 	// Number of small boats
 	protected int numSmallBoats = 50;
 	
@@ -147,6 +150,10 @@ public class ShippingModel extends SimpleModel {
 		this.avg_profit_graph.createSequence("Medium", this.boatfactory, "getMediumBoatAvgProfit");
 		this.avg_profit_graph.createSequence("Large", this.boatfactory, "getLargeBoatAvgProfit");
 		
+		this.expected_profit_graph = new OpenSequenceGraph("Expected Profit Difference", this);
+		this.expected_profit_graph.setXViewPolicy(OpenSequenceGraph.SHOW_ALL);
+		this.expected_profit_graph.createSequence("Profit Diff", this.boatfactory.all_boats.get(0), "getProfitDiff");
+		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -211,6 +218,7 @@ public class ShippingModel extends SimpleModel {
 		this.per_boatsize_profit_graph.display();
 		this.total_profit_graph.display();
 		this.avg_profit_graph.display();
+		this.expected_profit_graph.display();
 		dsurf.display();
 	}
 
@@ -222,7 +230,7 @@ public class ShippingModel extends SimpleModel {
 			agent.step();
 			
 		}
-		
+		this.expected_profit_graph.step();
 		// Update the graphs
 		if ((stepper % 100) == 0) {
 			stepper = 0;
@@ -232,6 +240,7 @@ public class ShippingModel extends SimpleModel {
 			this.per_boatsize_profit_graph.step();
 			this.total_profit_graph.step();
 			this.avg_profit_graph.step();
+			
 			System.out.println("Small Boat Profit: " + Double.toString(this.boatfactory.getSmallBoatProfit()));
 			System.out.println("Medium Boat Profit: " + Double.toString(this.boatfactory.getMediumBoatProfit()));
 			System.out.println("Large Boat Profit: " + Double.toString(this.boatfactory.getLargeBoatProfit()));
