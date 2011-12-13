@@ -49,6 +49,8 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	// Current expected profit
 	protected double expected_profit = 0.0;
 	
+	protected double purchased_price = 0.0;
+	
 	
 	
 	public BoatAgent(int x, int y, OceanSpace space) {
@@ -313,6 +315,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 	protected boolean PurchaseItems(int item_index, HarborAgent from_harbor) {
 		SellableItem buy_item = from_harbor.getItems().get(item_index);
         this.money -= from_harbor.getItems().get(item_index).GetHarbor2BoatPrice() * this.size;
+        this.purchased_price = from_harbor.getItems().get(item_index).GetHarbor2BoatPrice() * this.size;
 		boolean purchase_success = buy_item.BoatBuyItem(this.size);
 		
 		return purchase_success;
@@ -396,7 +399,7 @@ public class BoatAgent extends SimpleModel implements Drawable, AbstractAgent {
 			return 0.0;
 		
 		double remote_profit = target_harbor.getItems().get(this.item_index).GetBoat2HarborPrice();
-		return remote_profit - this.expected_profit;
+		return (remote_profit - this.purchased_price) - this.expected_profit;
 		
 	}
 
