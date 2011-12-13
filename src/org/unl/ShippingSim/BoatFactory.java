@@ -172,7 +172,26 @@ public class BoatFactory {
 	}
 	
 
-	
+	/**
+	 * Get the average harbors visited
+	 * @return array: [small, medium, large]
+	 */
+	public double[] getAverageHarborsVisited() {
+		double [] average_harbors = {0.0, 0.0, 0.0};
+		for(int i = 0; i < this.small_boats.size(); i++)
+			average_harbors[0] += this.small_boats.get(i).getHarborsVisited();
+		average_harbors[0] /= this.small_boats.size();
+		
+		for(int i = 0; i < this.medium_boats.size(); i++)
+			average_harbors[1] += this.medium_boats.get(i).getHarborsVisited();
+		average_harbors[1] /= this.medium_boats.size();
+		
+		for(int i = 0; i < this.large_boats.size(); i++)
+			average_harbors[2] += this.large_boats.get(i).getHarborsVisited();
+		average_harbors[2] /= this.large_boats.size();
+		
+		return average_harbors;
+	}
 	
 	
 
